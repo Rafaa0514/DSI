@@ -8,8 +8,64 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="GreenButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Image Source="Assets/Images/GreenButton.png"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="{TemplateBinding Name}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <!--Fondo-->
+        <Image Source="/Assets/Images/hojita.png" Stretch="Fill" Grid.RowSpan="2"/>
         
+        <!--Imagen de tablero-->
+        <Image Source="/Assets/Images/tablero.png" Margin="40,40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
+        <!--Informacion Izq-->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30,30" HorizontalAlignment="Left" VerticalAlignment="center">
+            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="Bichines en batalla"
+                       HorizontalAlignment="Center"/>
+            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="Black" Text="0 / 16" FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+            <Button Style="{ThemeResource GreenButton}" Width="200" HorizontalAlignment="Center"
+                    Name="AUMENTAR" Foreground="Black" FontFamily="{StaticResource Fuente}"/>
+        </StackPanel>
+
+        <!--Informacion Der-->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30,30" HorizontalAlignment="Right" VerticalAlignment="center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Image Source="/Assets/Images/Dinero.png" Stretch="Fill" Width="85" Height="85" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="33 Oro"
+                           Grid.Column="1"/>
+                <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="3 Oro/s"
+                           Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+            <Button Margin="20,20" Style="{ThemeResource GreenButton}" Width="200" HorizontalAlignment="Center"
+                    Name="MEJORAS" Foreground="Black" FontFamily="{StaticResource Fuente}"/>
+        </StackPanel>
     </Grid>
 </Page>

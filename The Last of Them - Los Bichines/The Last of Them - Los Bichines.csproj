@@ -145,10 +145,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\Dinero.png" />
     <Content Include="Assets\Images\GreenButton.png" />
     <Content Include="Assets\Images\hojita.png" />
     <Content Include="Assets\Images\post-it rosa.png" />
     <Content Include="Assets\Images\RedButton.png" />
+    <Content Include="Assets\Images\tablero.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
