@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="TheLastOfThem_LosBichines.DefeatScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TheLastOfThem_LosBichines"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="RedButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Image Source="Assets/Images/RedButton.png"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Text="{TemplateBinding Name}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Image Source="/Assets/Images/hojita.png" Stretch="Fill"/>
+        <Rectangle Stretch="Fill" Fill="Black" Opacity="0.5"/>
+
+        <Image Source="/Assets/Images/post-it rosa.png" Height="900"/>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <!--Decir al jugador si ha ganado o perdido-->
+            <TextBlock FontFamily="{StaticResource Fuente}" Text="-DERROTA-" FontSize="85" 
+                       FontWeight="ExtraBold" Foreground="#e93578" HorizontalAlignment="Center"/>
+
+            <!--Mostrar las estadísticas de la partida-->
+            <StackPanel Margin="0,30" Orientation="Horizontal" Name="Columns">
+                <StackPanel Margin="0,0,30,30" x:Name="Stats" Orientation="Vertical">
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Tropas reclutadas" FontSize="40"
+                               Foreground="#e93578" Margin="0,0,0,10" FontStyle="Italic"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Tropas eliminadas" FontSize="40"
+                               Foreground="#e93578" Margin="0,0,0,10" FontStyle="Italic"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Oro obtenido" FontSize="40"
+                               Foreground="#e93578" Margin="0,0,0,10" FontStyle="Italic"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Tiempo" FontSize="40"
+                               Foreground="#e93578" FontStyle="Italic"/>
+                </StackPanel>
+
+                <StackPanel x:Name="Values" Orientation="Vertical">
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="61" FontSize="40"
+                               Foreground="#e93578" Margin="0,0,0,10" FontStyle="Italic"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="54" FontSize="40"
+                               Foreground="#e93578" Margin="0,0,0,10" FontStyle="Italic"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="404" FontSize="40"
+                               Foreground="#e93578" Margin="0,0,0,10" FontStyle="Italic"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="7 min" FontSize="40"
+                               Foreground="#e93578" FontStyle="Italic"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Button Width="300" Style="{StaticResource RedButton}" Name="Aceptar" FontFamily="{StaticResource Fuente}"
+                    Foreground="Black" FontWeight="ExtraBold"  HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>
