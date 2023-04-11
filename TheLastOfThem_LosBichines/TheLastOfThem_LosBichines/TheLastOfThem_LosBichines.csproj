@@ -11,7 +11,7 @@
     <AssemblyName>TheLastOfThem_LosBichines</AssemblyName>
     <DefaultLanguage>es-ES</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22000.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -142,8 +142,27 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\GreenButton.png" />
-    <Content Include="Assets\hojita.png" />
+    <Content Include="Assets\Images\Bichines\Bichin Gorila.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Ariete.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Arquero.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Bombardero.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-ConstructorBallesta.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-ConstructorPared.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Escudero.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Espadachin.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Gymbro.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Loco.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Minero.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-MineroGrande.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-MineroPequeño.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-PateaPiedras.png" />
+    <Content Include="Assets\Images\Bichines\Bichin-Trampero.png" />
+    <Content Include="Assets\Images\Dinero.png" />
+    <Content Include="Assets\Images\GreenButton.png" />
+    <Content Include="Assets\Images\hojita.png" />
+    <Content Include="Assets\Images\post-it rosa.png" />
+    <Content Include="Assets\Images\RedButton.png" />
+    <Content Include="Assets\Images\tablero.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -183,6 +202,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\ArchitectsDaughter-Regular.ttf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

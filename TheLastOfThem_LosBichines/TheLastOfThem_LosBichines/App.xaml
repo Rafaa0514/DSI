@@ -4,4 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TheLastOfThem_LosBichines">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <FontFamily x:Key="Fuente">/Assets/Fonts/ArchitectsDaughter-Regular.ttf#Architects Daughter</FontFamily>
+        </ResourceDictionary>
+
+    </Application.Resources>
 </Application>
