@@ -7,7 +7,20 @@
     <Application.Resources>
         <ResourceDictionary>
             <FontFamily x:Key="Fuente">/Assets/Fonts/ArchitectsDaughter-Regular.ttf#Architects Daughter</FontFamily>
-        </ResourceDictionary>
 
+            <Style TargetType="Button" x:Key="GreenButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Source="Assets/Images/GreenButton.png"/>
+                                <TextBlock FontFamily="{StaticResource Fuente}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="Black" Text="{TemplateBinding Name}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
