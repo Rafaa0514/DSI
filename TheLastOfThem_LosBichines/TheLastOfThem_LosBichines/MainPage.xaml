@@ -69,7 +69,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.05*"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock 
                 Text="MM-Ovo Games" 
