@@ -47,5 +47,10 @@ namespace TheLastOfThem_LosBichines
         {
             Environment.Exit(0);
         }
+
+        private void LogInButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(OnTropeSelected));
+        }
     }
 }

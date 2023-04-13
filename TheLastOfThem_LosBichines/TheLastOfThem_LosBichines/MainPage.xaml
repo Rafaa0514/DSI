@@ -60,7 +60,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Style="{StaticResource GreenButton}" Name="IniciarSesión"
-                Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+                Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="LogInButton_OnClick"/>
         </Grid>
 
 
