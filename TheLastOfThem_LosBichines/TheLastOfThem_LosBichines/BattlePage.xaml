@@ -43,19 +43,21 @@
         </Grid.RowDefinitions>
 
         <!--Fondo-->
-        <Image Source="/Assets/Images/hojita.png" Stretch="Fill" Grid.RowSpan="2"/>
+        <Image Style="{StaticResource Background}" Grid.RowSpan="2"/>
 
         <!--Imagen de tablero-->
         <Image Source="/Assets/Images/tablero.png" Margin="40,40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        
+        <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Top" Value="59" Maximum="100" Width="200" 
+                     Height="30" Margin="85, 250" Foreground="#d1ee91" BorderBrush="Black" BorderThickness="1"/>
+        <ProgressBar HorizontalAlignment="Right" VerticalAlignment="Top" Value="67" Maximum="100" Width="200" 
+                     Height="30" Margin="85, 250" Foreground="#e93578" BorderBrush="Black" BorderThickness="1"/>
+
         <!--Barras de vida de las torres-->
         
 
         <!--Informacion Izq-->
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30,30" HorizontalAlignment="Left" VerticalAlignment="center">
-            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="Bichines"
-                       HorizontalAlignment="Center"/>
-            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="en batalla"
+            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="Bichines&#x0a;en batalla"
                        HorizontalAlignment="Center"/>
             <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="Black" Text="0 / 16" FontWeight="Bold"
                        HorizontalAlignment="Center"/>

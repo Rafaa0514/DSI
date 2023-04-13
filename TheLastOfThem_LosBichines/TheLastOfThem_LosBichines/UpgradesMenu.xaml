@@ -32,8 +32,8 @@
     </Page.Resources>
     
     <Grid>
-
-        <Rectangle Fill="Black" Stretch="Fill" Opacity="0.3"/>
+        <Image Style="{StaticResource Background}"/>
+        <Rectangle Fill="Black" Stretch="Fill" Opacity="0.6"/>
         <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image Source="/Assets/Images/arrowSymbol.png" Width="100" Margin="350, 200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
