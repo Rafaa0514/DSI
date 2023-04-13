@@ -20,6 +20,12 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            
+
+            <Style TargetType="Image" x:Key="Background">
+                <Setter Property="Source" Value="Assets/Images/hojita.png"/>
+                <Setter Property="Stretch" Value="Fill"/>
+            </Style>
         </ResourceDictionary>
         
     </Application.Resources>

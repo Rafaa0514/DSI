@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Fondo-->
-        <Image Source="Assets/Images/hojita.png" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="3"/>
+        <Image Style="{StaticResource Background}" Grid.RowSpan="4" Grid.ColumnSpan="3"/>
         
         <!--Titulo-->
         <StackPanel Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">

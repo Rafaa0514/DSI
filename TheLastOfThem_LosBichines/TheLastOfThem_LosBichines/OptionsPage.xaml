@@ -9,6 +9,118 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <!--Fondo-->
+        <Image Style="{StaticResource Background}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="1.7*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+            <!--Titulo-->
+            <TextBlock 
+                Text="-Opciones-"
+                FontFamily="{StaticResource Fuente}" 
+                FontSize="80" 
+                Foreground="HotPink"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"/>
+
+            <!--ATRAS-->
+            <Button Name="Back" Click="BackButton_OnClick" Grid.Row="1" Width="150" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <Image Source="Assets/Images/Atras.png"/>
+            </Button>
+            
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!--VOLUMEN-->
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock 
+                    Text="VOLUMEN"
+                    FontFamily="{StaticResource Fuente}" 
+                    FontSize="50" 
+                    Foreground="LawnGreen"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="GENERAL" 
+                                    Foreground="Black"
+                                    FontFamily="{StaticResource Fuente}"
+                                    FontSize="40"/>
+                        <Slider
+                            Width="300"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center">
+                        </Slider>
+                        <CheckBox HorizontalContentAlignment="Left" 
+                            HorizontalAlignment="Center">
+                        </CheckBox>
+                    </StackPanel>
+                    <!--SFX-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="SFX" 
+                                    Foreground="Black"
+                                    FontFamily="{StaticResource Fuente}"
+                                    FontSize="40"/>
+                        <CheckBox HorizontalContentAlignment="Left" 
+                            HorizontalAlignment="Center">
+                        </CheckBox>
+                    </StackPanel>
+                    <!--MUSICA-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="MÚSICA" 
+                                    Foreground="Black"
+                                    FontFamily="{StaticResource Fuente}"
+                                    FontSize="40"/>
+                        <CheckBox HorizontalContentAlignment="Left" 
+                            HorizontalAlignment="Center">
+                        </CheckBox>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Center" Grid.Row="1">
+                    <TextBlock 
+                    Text="OTROS"
+                    FontFamily="{StaticResource Fuente}" 
+                    FontSize="50" 
+                    Foreground="LawnGreen"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
+                        
+                    <!--AYUDA-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="AYUDA" 
+                                    Foreground="Black"
+                                    FontFamily="{StaticResource Fuente}"
+                                    FontSize="40"/>
+                        <CheckBox HorizontalContentAlignment="Left" 
+                            HorizontalAlignment="Center"
+                                  BorderBrush="Black">
+                        </CheckBox>
+                    </StackPanel>
+                    <!--MUSICA-->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="TAMAÑO IU" 
+                                Foreground="Black"
+                                FontFamily="{StaticResource Fuente}"
+                                FontSize="40"/>
+                        <Slider
+                            Width="300"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center">
+                        </Slider>
+                    </StackPanel>
+                </StackPanel>
+                    
+
+            </Grid>
+        </Grid>
 
     </Grid>
 </Page>
