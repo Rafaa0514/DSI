@@ -30,7 +30,7 @@
                 VerticalAlignment="Top"/>
 
             <!--ATRAS-->
-            <Button Name="Back" Click="BackButton_OnClick" Grid.Row="1" Width="150" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Button Name="Back" Click="BackButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                 <Image Source="Assets/Images/Atras.png"/>
             </Button>
             

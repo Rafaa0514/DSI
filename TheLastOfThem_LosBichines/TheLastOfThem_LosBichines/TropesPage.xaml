@@ -10,5 +10,106 @@
 
     <Grid>
 
+        <!--Fondo-->
+        <Image Style="{StaticResource Background}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="1.7*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+            <!--Titulo-->
+            <TextBlock 
+                Text="-Tropas-"
+                FontFamily="{StaticResource Fuente}" 
+                FontSize="80" 
+                Foreground="HotPink"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"/>
+
+            <!--ATRAS-->
+            <Button Name="Back" Click="BackButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <Image Source="Assets/Images/Atras.png"/>
+            </Button>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Line Stroke="LawnGreen" Grid.Column="1" Y1="400" StrokeThickness="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <Line Stroke="LawnGreen" Grid.Column="1" Y1="400" StrokeThickness="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                <!--VOLUMEN-->
+                <StackPanel VerticalAlignment="Top" Spacing="50">
+                    <TextBlock 
+                    Text="Defensa"
+                    FontFamily="{StaticResource Fuente}" 
+                    FontSize="50" 
+                    Foreground="LawnGreen"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="Assets/Images/Bichines/Bichin-ConstructorBallesta.png" Width="100"/>
+                        <Image Source="Assets/Images/Bichines/Bichin-Escudero.png" Width="100"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="Assets/Images/Bichines/Bichin-ConstructorPared.png" Width="100"/>
+                        <Image Source="Assets/Images/Bichines/Bichin-Loco.png" Width="100"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="Assets/Images/Bichines/Bichin-Trampero.png" Width="100"/>
+                        <Image Source="Assets/Images/Bichines/Bichin-PateaPiedras.png" Width="100"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Top" Grid.Column="1" Spacing="50">
+                    <TextBlock 
+                    Text="Minero"
+                    FontFamily="{StaticResource Fuente}" 
+                    FontSize="50" 
+                    Foreground="LawnGreen"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
+
+                    <Image Source="Assets/Images/Bichines/Bichin-MineroPequeño.png" Width="100"/>
+
+                    <Image Source="Assets/Images/Bichines/Bichin-Minero.png" Width="100"/>
+
+                    <Image Source="Assets/Images/Bichines/Bichin-MineroGrande.png" Width="100"/>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Top" Grid.Column="2" Spacing="50">
+                    <TextBlock 
+                    Text="Ataque"
+                    FontFamily="{StaticResource Fuente}" 
+                    FontSize="50" 
+                    Foreground="LawnGreen"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="Assets/Images/Bichines/Bichin-Arquero.png" Width="100"/>
+                        <Image Source="Assets/Images/Bichines/Bichin-Bombardero.png" Width="100"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="Assets/Images/Bichines/Bichin-Espadachin.png" Width="100"/>
+                        <Image Source="Assets/Images/Bichines/Bichin-Ariete.png" Width="100"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="Assets/Images/Bichines/Bichin-Gymbro.png" Width="100"/>
+                        <Image Source="Assets/Images/Bichines/Bichin Gorila.png" Width="100"/>
+                    </StackPanel>
+                </StackPanel>
+
+
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

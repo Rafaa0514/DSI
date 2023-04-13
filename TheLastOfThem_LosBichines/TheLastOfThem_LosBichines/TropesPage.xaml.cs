@@ -26,5 +26,13 @@ namespace TheLastOfThem_LosBichines
         {
             this.InitializeComponent();
         }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
     }
 }
