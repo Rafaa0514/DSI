@@ -122,6 +122,9 @@
     <Compile Include="BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DefeatScreen.xaml.cs">
+      <DependentUpon>DefeatScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogInMenu.xaml.cs">
       <DependentUpon>LogInMenu.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,9 @@
     <Compile Include="UserInfo.xaml.cs">
       <DependentUpon>UserInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VictoryScreen.xaml.cs">
+      <DependentUpon>VictoryScreen.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -154,6 +160,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\arrowSymbol.png" />
     <Content Include="Assets\Images\Atras.png" />
     <Content Include="Assets\Images\Bichines\Bichin Gorila.png" />
     <Content Include="Assets\Images\Bichines\Bichin-Ariete.png" />
@@ -170,12 +177,17 @@
     <Content Include="Assets\Images\Bichines\Bichin-MineroPequeño.png" />
     <Content Include="Assets\Images\Bichines\Bichin-PateaPiedras.png" />
     <Content Include="Assets\Images\Bichines\Bichin-Trampero.png" />
+    <Content Include="Assets\Images\blockedSymbol.png" />
     <Content Include="Assets\Images\Dinero.png" />
+    <Content Include="Assets\Images\DineroNegro.png" />
     <Content Include="Assets\Images\GreenButton.png" />
     <Content Include="Assets\Images\hojita.png" />
+    <Content Include="Assets\Images\noFillStarSymbol.png" />
     <Content Include="Assets\Images\post-it rosa.png" />
     <Content Include="Assets\Images\RedButton.png" />
+    <Content Include="Assets\Images\starSymbol.png" />
     <Content Include="Assets\Images\tablero.png" />
+    <Content Include="Assets\Images\upgradeSymbol.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -193,6 +205,10 @@
     <Page Include="BattlePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DefeatScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="LogInMenu.xaml">
       <SubType>Designer</SubType>
@@ -225,6 +241,10 @@
     <Page Include="UserInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VictoryScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
