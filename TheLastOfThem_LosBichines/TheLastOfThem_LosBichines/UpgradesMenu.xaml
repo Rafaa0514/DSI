@@ -1,0 +1,348 @@
+﻿<Page
+    x:Class="TheLastOfThem_LosBichines.UpgradesMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TheLastOfThem_LosBichines"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="GridView" x:Key="InfoBichin">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+
+        <Rectangle Fill="Black" Stretch="Fill" Opacity="0.3"/>
+        <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="/Assets/Images/arrowSymbol.png" Width="100" Margin="350, 200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="70" Text="-Mejoras-" HorizontalAlignment="Center"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Margin="10, 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-ConstructorBallesta.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,0" VerticalAlignment="Top"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Escudero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="2" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Column="2" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Source="/Assets/Images/Bichines/Bichin-MineroPequeño.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="2" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Column="3" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Arquero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                </Grid>
+
+                <Grid Grid.Column="4" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Bombardero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,5"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-ConstructorPared.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="1" Foreground="#de6aa5" FontSize="20" Margin="5,5"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Loco.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="2" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Minero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="3" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Espadachin.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="1" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                </Grid>
+                
+                <Grid Grid.Row="1" Grid.Column="4" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Ariete.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Source="/Assets/Images/Bichines/Bichin-Trampero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="1" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-PateaPiedras.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="2" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Source="/Assets/Images/Bichines/Bichin-MineroGrande.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="3" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Gymbro.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="1" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/upgradeSymbol.png" Height="25" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="4" Margin="10,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin Gorila.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" Text="2" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                    <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    <Image Grid.Column="2" Source="/Assets/Images/upgradeSymbol.png" Height="25" VerticalAlignment="Top"/>
+                </Grid>
+                
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="/Assets/Images/DineroNegro.png" Width="90"/>
+
+                <TextBlock Margin="20,0" Text="33 oro" Foreground="Black" FontFamily="{StaticResource Fuente}" FontSize="70" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Page>

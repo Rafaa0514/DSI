@@ -20,16 +20,11 @@ namespace TheLastOfThem_LosBichines
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class BattlePage : Page
+    public sealed partial class UpgradesMenu : Page
     {
-        public BattlePage()
+        public UpgradesMenu()
         {
             this.InitializeComponent();
-        }
-
-        private void Open_UpgradesMenu(object sender, RoutedEventArgs e)
-        {
-            //UpgradeMenu.Navigate(typeof(UpgradesMenuPage));
         }
     }
 }

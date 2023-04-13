@@ -83,7 +83,7 @@
                            Grid.Column="1" Grid.Row="1"/>
             </Grid>
             <Button Margin="20,20" Style="{ThemeResource GreenButton}" Width="200" HorizontalAlignment="Center"
-                    Name="MEJORAS" Foreground="Black" FontFamily="{StaticResource Fuente}"/>
+                    Name="MEJORAS" Foreground="Black" FontFamily="{StaticResource Fuente}" Click="Open_UpgradesMenu"/>
         </StackPanel>
         
         <!--Panel de Tropas-->
@@ -163,6 +163,8 @@
             </StackPanel>
             
         </StackPanel>
-        
+
+        <Frame x:Name="UpgradeMenu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"/>
+
     </Grid>
 </Page>
