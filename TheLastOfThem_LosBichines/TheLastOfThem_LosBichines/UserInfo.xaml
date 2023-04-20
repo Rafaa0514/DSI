@@ -11,7 +11,10 @@
     <Grid>
         <Rectangle Fill="Black" Stretch="Fill" Opacity="0.3"/>
         <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Assets/Images/Atras.png" Width="70" Margin="370, 120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <!--ATRAS-->
+        <Button Name="Back" Click="BackButton_OnClick" Width="70"  Margin="370, 120" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image Source="Assets/Images/Atras.png"/>
+        </Button>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -23,7 +26,7 @@
 
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="40">
                 <StackPanel Orientation="Horizontal" Spacing="20">
-                    <Image Source="Assets/StoreLogo.png"/>
+                    <Image Source="Assets/Images/fotoPerfil.png" Width="60"/>
                     <TextBlock FontFamily="{StaticResource Fuente}" FontSize="40" Text="-Nombre Usuario-" HorizontalAlignment="Center"/>
                 </StackPanel>
                 <Grid>
@@ -44,7 +47,7 @@
                     </StackPanel>
                 </Grid>
                 
-                <Button Margin="7" Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="Aceptar"/>
+                <Button Margin="7" Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="CerrarSesion" Click="LogOutButton_OnClick"/>
             </StackPanel>
         </Grid>
     </Grid>

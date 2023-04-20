@@ -40,17 +40,17 @@
         </StackPanel>
 
         <!--Botones-->
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Style="{StaticResource GreenButton}" Name="Luchar" Click="BattleButton_OnClick"/>
-            <Button Grid.Row="1" Style="{StaticResource GreenButton}" Name="Tropas" Click="TropesButton_OnClick"/>
-            <Button Grid.Row="2" Style="{StaticResource GreenButton}" Name="Opciones" Click="OptionsButton_OnClick"/>
-            <Button Grid.Row="3" Style="{StaticResource GreenButton}" Name="Salir" Click="QuitButton_OnClick"/>
+            <Button Grid.Row="0" TabIndex="0" Style="{StaticResource GreenButton}" Name="Luchar" Click="BattleButton_OnClick"/>
+            <Button Grid.Row="1" TabIndex="1" Style="{StaticResource GreenButton}" Name="Tropas" Click="TropesButton_OnClick"/>
+            <Button Grid.Row="2" TabIndex="2" Style="{StaticResource GreenButton}" Name="Opciones" Click="OptionsButton_OnClick"/>
+            <Button Grid.Row="3" TabIndex="3" Style="{StaticResource GreenButton}" Name="Salir" Click="QuitButton_OnClick"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -59,8 +59,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource GreenButton}" Name="IniciarSesión"
-                Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="LogInButton_OnClick"/>
+            
+            <Button Style="{StaticResource GreenButton}" TabIndex="4" x:Name="IniciarSesion"
+                Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Click="LogInButton_OnClick" Visibility="Visible"/>
+            
+            <StackPanel x:Name="SesionIniciada" Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Column="1" Height="80" Visibility="Collapsed">
+                <Image Source="Assets/Images/fotoPerfil.png" Width="50"/>
+                <Button Style="{StaticResource GreenButton}" Name="NombreUsuario" TabIndex="4" Click="UserInfoButton_OnClick"/>
+            </StackPanel>
+                
         </Grid>
 
 

@@ -50,7 +50,33 @@ namespace TheLastOfThem_LosBichines
 
         private void LogInButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(OnTropeSelected));
+            Frame.Navigate(typeof(LogInMenu));
+        }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e?.Parameter is bool loggedIn)
+            {
+                if (loggedIn)
+                {
+                    IniciarSesion.Visibility = Visibility.Collapsed;
+                    SesionIniciada.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    IniciarSesion.Visibility = Visibility.Visible;
+                    SesionIniciada.Visibility = Visibility.Collapsed;
+                }
+            }
+
+
+            base.OnNavigatedTo(e);
+        }
+
+        private void UserInfoButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(UserInfo));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,51 @@ namespace TheLastOfThem_LosBichines
     /// </summary>
     public sealed partial class LogInMenu : Page
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _userName;
+        private string _password;
+
+
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                _userName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogInAllowed)));
+            }
+        }
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                _password = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogInAllowed)));
+            }
+        }
+
+
+
+        public bool IsLogInAllowed => (UserName?.Trim().Length > 2 && Password?.Trim().Length > 2);
         public LogInMenu()
         {
             this.InitializeComponent();
+        }
+
+        private void AcceptButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage), true);
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack) 
+            {
+                Frame.GoBack();
+            }
         }
     }
 }

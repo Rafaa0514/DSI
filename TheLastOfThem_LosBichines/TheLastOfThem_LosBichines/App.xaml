@@ -21,6 +21,19 @@
                 </Setter>
             </Style>
             
+            <Style TargetType="Button" x:Key="GrayButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <Image Source="Assets/Images/GrayButton.png"/>
+                                <TextBlock FontFamily="{StaticResource Fuente}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="Black" Text="{TemplateBinding Name}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
 
             <Style TargetType="Image" x:Key="Background">
                 <Setter Property="Source" Value="Assets/Images/hojita.png"/>

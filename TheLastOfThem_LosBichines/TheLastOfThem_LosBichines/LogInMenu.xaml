@@ -11,7 +11,11 @@
     <Grid>
         <Rectangle Fill="Black" Stretch="Fill" Opacity="0.3"/>
         <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/Assets/Images/arrowSymbol.png" Width="100" Margin="350, 200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        
+        <!--ATRAS-->
+        <Button Name="Back" Click="BackButton_OnClick" Width="100" Margin="350, 200" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image Source="Assets/Images/Atras.png"/>
+        </Button>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -24,11 +28,12 @@
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock FontFamily="{StaticResource Fuente}" FontSize="50" Text="-Iniciar Sesión-" HorizontalAlignment="Center"/>
                 <TextBlock FontFamily="{StaticResource Fuente}" FontSize="40" Foreground="#d1ee91" Text="-Nombre-" HorizontalAlignment="Center"/>
-                <TextBox Height="60"/>
+                <TextBox Height="60" Text="{x:Bind UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock FontFamily="{StaticResource Fuente}" FontSize="40" Foreground="#d1ee91" Text="-Contraseña-" HorizontalAlignment="Center"/>
-                <TextBox Height="60"/>
+                <TextBox Height="60" Text="{x:Bind Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Button Margin="7" Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="Aceptar"/>
+                <Button Margin="7" Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="Aceptar" Click="AcceptButton_OnClick"
+                        Visibility="{x:Bind IsLogInAllowed, Mode=OneWay}"/>
                 <Button Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="CrearCuenta"/>
             </StackPanel>
         </Grid>

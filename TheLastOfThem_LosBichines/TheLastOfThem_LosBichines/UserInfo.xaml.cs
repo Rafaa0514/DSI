@@ -26,5 +26,18 @@ namespace TheLastOfThem_LosBichines
         {
             this.InitializeComponent();
         }
+
+        private void LogOutButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage), false);
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack) 
+            {
+                Frame.GoBack();
+            }
+        }
     }
 }
