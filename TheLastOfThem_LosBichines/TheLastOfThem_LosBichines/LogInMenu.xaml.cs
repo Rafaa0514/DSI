@@ -21,7 +21,7 @@ namespace TheLastOfThem_LosBichines
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class LogInMenu : Page
+    public sealed partial class LogInMenu : Page, INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,6 +29,8 @@ namespace TheLastOfThem_LosBichines
         private string _userName;
         private string _password;
 
+        public Visibility IsLogInAllowed => (UserName?.Trim().Length > 2 && Password?.Trim().Length > 2) ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IsLogInNotAllowed => ((IsLogInAllowed == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed);
 
         public string UserName
         {
@@ -37,6 +39,7 @@ namespace TheLastOfThem_LosBichines
             {
                 _userName = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogInAllowed)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogInNotAllowed)));
             }
         }
         public string Password
@@ -46,13 +49,13 @@ namespace TheLastOfThem_LosBichines
             {
                 _password = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogInAllowed)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogInNotAllowed)));
             }
         }
 
 
 
-        public bool IsLogInAllowed => (UserName?.Trim().Length > 2 && Password?.Trim().Length > 2);
-        public LogInMenu()
+         public LogInMenu()
         {
             this.InitializeComponent();
         }

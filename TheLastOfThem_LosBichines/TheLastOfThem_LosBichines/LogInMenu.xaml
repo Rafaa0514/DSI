@@ -10,12 +10,31 @@
 
     <Grid>
         <Rectangle Fill="Black" Stretch="Fill" Opacity="0.3"/>
-        <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
-        <!--ATRAS-->
-        <Button Name="Back" Click="BackButton_OnClick" Width="100" Margin="350, 200" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Image Source="Assets/Images/Atras.png"/>
-        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                <!--ATRAS-->
+                <Button Name="Back" Click="BackButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1">
+                    <Image Source="Assets/Images/Atras.png"/>
+                </Button>
+            </Grid>
+        </Grid>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -32,6 +51,7 @@
                 <TextBlock FontFamily="{StaticResource Fuente}" FontSize="40" Foreground="#d1ee91" Text="-Contraseña-" HorizontalAlignment="Center"/>
                 <TextBox Height="60" Text="{x:Bind Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
+                <Button Margin="7" Style="{StaticResource GrayButton}" Width="300" HorizontalAlignment="Center" Visibility="{x:Bind IsLogInNotAllowed, Mode=OneWay}"/>
                 <Button Margin="7" Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="Aceptar" Click="AcceptButton_OnClick"
                         Visibility="{x:Bind IsLogInAllowed, Mode=OneWay}"/>
                 <Button Style="{StaticResource GreenButton}" Width="300" HorizontalAlignment="Center" Name="CrearCuenta"/>
