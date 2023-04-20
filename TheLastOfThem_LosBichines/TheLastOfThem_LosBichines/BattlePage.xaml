@@ -15,7 +15,7 @@
                     <ControlTemplate>
                         <Grid>
                             <Image Source="Assets/Images/GreenButton.png"/>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="{TemplateBinding Name}"/>
+                            <TextBlock FontFamily="{StaticResource Fuente}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="{TemplateBinding Name}"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -23,13 +23,14 @@
         </Style>
 
         <DataTemplate x:Key="BichinVM" x:DataType="local:VMBichin">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" CanDrag="{Binding Seleccionable}"
+            <StackPanel>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" CanDrag="{Binding Seleccionable}"
                   DragStarting="OnItemDrag" Background="White">
-                <Image Source="{x:Bind Imagen}" Width="65"/>
-                <Rectangle Fill="Black" Height="65" Width="65" Opacity="0.7" Visibility="{Binding Desbloqueado}"/>
-            </Grid>
+                    <Image Source="{x:Bind Imagen}" Width="65"/>
+                    <Rectangle Fill="Black" Height="65" Width="65" Opacity="0.7" Visibility="{Binding Desbloqueado}"/>
+                </Grid>
+            </StackPanel>
         </DataTemplate>
-
 
         <DataTemplate x:Key="BotonBichin" x:DataType="local:VMBButton">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
@@ -46,15 +47,13 @@
                 <Image Source="{x:Bind Imagen}" Width="80" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
                 <Image Source="{x:Bind BotonBloqueado}" Grid.Column="2" Visibility="{x:Bind Bloqueado}" Width="20"/>
                 <Image Source="{x:Bind BotonMejorar}" Grid.Column="2" Visibility="{x:Bind Mejorable}" Width="20"/>
-                <TextBlock Text="{x:Bind Nivel}" FontFamily="{StaticResource Fuente}" Foreground="#de6aa5" FontSize="20"
+                <TextBlock x:Name="NivelTxt" Text="{x:Bind Nivel}" FontFamily="{StaticResource Fuente}" Foreground="#de6aa5" FontSize="20"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Rectangle Fill="Black" Opacity="0.6" Visibility="{x:Bind Sombra}" Grid.RowSpan="3" Grid.ColumnSpan="3" Width="80" Height="80"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
-    
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -158,6 +157,8 @@
                   IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True" />
         </Grid>
 
+        
+        <!--"Menu" Mejoras-->
         <Grid x:Name="UpgradesMenu" Grid.RowSpan="2" Visibility="Collapsed" IsTapEnabled="False">
             <Rectangle Stretch="Fill" Fill="Black" Opacity="0.6"/>
             <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -169,8 +170,8 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock FontFamily="{StaticResource Fuente}" FontSize="70" Text="-Mejoras-" HorizontalAlignment="Center"/>
 
-                <GridView ItemsSource="{x:Bind BotonesBichines}" ItemTemplate="{StaticResource BotonBichin}">
-                    
+                <GridView x:Name="PanelBotones" ItemsSource="{x:Bind BotonesBichines}" ItemTemplate="{StaticResource BotonBichin}" 
+                          IsItemClickEnabled="True" ItemClick="ClickOnTropeButton">
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VariableSizedWrapGrid Orientation="Vertical" MaximumRowsOrColumns="3"/>
@@ -183,8 +184,29 @@
                     <TextBlock x:Name="OtroTextoDinero" Margin="20,0" Text="Oro" Foreground="Black" FontFamily="{StaticResource Fuente}" FontSize="70" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
+
+            <Grid x:Name="PopUp" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Assets/Images/Popup.png" Width="350"/>
+
+                <Button Name="SecondBack" Click="SecondBackButton_OnClick" Grid.Row="1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                    <Image Source="Assets/Images/Atras.png"/>
+                </Button>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="PriceText" FontFamily="{StaticResource Fuente}" FontSize="40" Foreground="White" Text="Hola"
+                               HorizontalAlignment="Center"/>
+                    <Button Style="{StaticResource GreenButton}" x:Name="Mejorar" Width="200" FontSize="30" Foreground="Black"
+                            HorizontalAlignment="Center" Click="upgradeTrope" Visibility="Collapsed"/>
+                    <Button Style="{StaticResource GrayButton}" x:Name="mejorar" Width="200" FontSize="30" Foreground="Black"
+                            HorizontalAlignment="Center" Visibility="Collapsed"/>
+                    <Button Style="{StaticResource GreenButton}" x:Name="Desbloquear" Width="260" FontSize="30" Foreground="Black"
+                            HorizontalAlignment="Center" Click="unlockTrope" Visibility="Collapsed"/>
+                    <Button Style="{StaticResource GrayButton}" x:Name="desbloquear" Width="260" FontSize="30" Foreground="Black"
+                            HorizontalAlignment="Center" Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
         </Grid>
-        
+
     </Grid>
 
 </Page>

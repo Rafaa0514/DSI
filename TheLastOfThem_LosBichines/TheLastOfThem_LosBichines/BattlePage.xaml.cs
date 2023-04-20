@@ -29,6 +29,9 @@ namespace TheLastOfThem_LosBichines
 
     public sealed partial class BattlePage : Page
     {
+
+        VMBButton BichinClickao;
+
         public ObservableCollection<VMBichin> ListaBichines { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesDefensa { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesMineros { get; } = new ObservableCollection<VMBichin>();
@@ -46,11 +49,14 @@ namespace TheLastOfThem_LosBichines
         // Variables de monedas
         int gold, goldPS;
 
+        //Variables para los botones
+        Visibility isActive;
+
         public BattlePage()
         {
             this.InitializeComponent();
 
-            string[] names = new string[15];
+            BichinClickao = null;
 
             currentTropes = gold = deployedTropes = killedTropes = matchDuration = 0;
             maxtropes = 16;
@@ -58,6 +64,9 @@ namespace TheLastOfThem_LosBichines
             goldNeeded = 15;
             increaseCost = 15;
             max = 32;
+
+            isActive = Visibility.Collapsed;
+            PopUp.Visibility = isActive;
 
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += (sender, o) => {
@@ -73,26 +82,14 @@ namespace TheLastOfThem_LosBichines
             InfoTropes.Text = currentTropes.ToString() + " / " + maxtropes.ToString();
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            UpgradesMenu.Visibility = Visibility.Collapsed;
-        }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Cosntruye las listas de ModelView a partir de la lista Modelo 
-            //if (ListaBichines != null)
-            //    foreach (Bichin dron in Model.GetAllBichines())
-            //    {
-            //        VMBichin VMitem = new VMBichin(dron);
-            //        ListaBichines.Add(VMitem);
-            //    }
-
             if (BichinesDefensa != null)
                 foreach (Bichin d in Model.GetDefenseBichines())
                 {
                     VMBichin VMitem = new VMBichin(d);
                     BichinesDefensa.Add(VMitem);
+                    ListaBichines.Add(VMitem);
                 }
 
             if (BichinesMineros != null)
@@ -100,6 +97,7 @@ namespace TheLastOfThem_LosBichines
                 {
                     VMBichin VMitem = new VMBichin(d);
                     BichinesMineros.Add(VMitem);
+                    ListaBichines.Add(VMitem);
                 }
 
             if (BichinesAtaque != null)
@@ -107,6 +105,7 @@ namespace TheLastOfThem_LosBichines
                 {
                     VMBichin VMitem = new VMBichin(d);
                     BichinesAtaque.Add(VMitem);
+                    ListaBichines.Add(VMitem);
                 }
 
             if (BotonesBichines != null)
@@ -130,6 +129,42 @@ namespace TheLastOfThem_LosBichines
 
         }
 
+        private void upgradeTrope(object sender, RoutedEventArgs e)
+        {
+            gold -= BichinClickao.Nivel * 10;
+            Gold.Text = gold.ToString() + " Oro";
+
+            //foreach (VMBButton bichin in BotonesBichines)
+            //{
+            //    if (bichin.Name == BichinClickao.Name)
+            //    {
+            //        bichin.Nivel++;
+            //        GridViewItem gv = PanelBotones.Items[bichin.Id] as GridViewItem;
+            //        Grid g = PanelBotones.Items[bichin.Id] as Grid;
+            //        ((TextBlock)g.Children[3]).Text = bichin.Nivel.ToString();
+            //    }
+            //}
+        }
+
+        private void unlockTrope(object sender, RoutedEventArgs e)
+        {
+            gold -= 10;
+            Gold.Text = gold.ToString() + " Oro";
+            Grid g = null;
+
+            //foreach(VMBichin bichin in ListaBichines)
+            //{
+            //    if (bichin.Name == BichinClickao.Name)
+            //    {
+            //        bichin.Desbloqueado = Visibility.Collapsed;
+            //        if (bichin.Group == "Defensas")
+            //        {
+            //            BichinesDefensa[bichin.Id].Seleccionable = true;
+            //        }
+            //    }
+            //}
+        }
+
         private void DraggingOverCanvas(object sender, DragEventArgs e)
         {
 
@@ -138,6 +173,72 @@ namespace TheLastOfThem_LosBichines
         private void ItemKeyDown(object sender, KeyRoutedEventArgs e)
         {
 
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            BichinClickao = null;
+            Mejorar.Visibility = Visibility.Collapsed;
+            mejorar.Visibility = Visibility.Collapsed;
+            Desbloquear.Visibility = Visibility.Collapsed;
+            desbloquear.Visibility = Visibility.Collapsed;
+            PopUp.Visibility = Visibility.Collapsed;
+            UpgradesMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void ClickOnTropeButton(object sender, ItemClickEventArgs e)
+        {
+            VMBButton b = e.ClickedItem as VMBButton;
+            BichinClickao = b;
+            isActive = Visibility.Visible;
+            PopUp.Visibility = isActive;
+            
+            if (b.Disponible == true)
+            {
+                if (b.Nivel < 3)
+                {
+                    int coste = 10 * b.Nivel;
+                    PriceText.Text = "Precio " + coste;
+                    if (gold >= coste)
+                    {
+                        Mejorar.Visibility = Visibility.Visible;
+                        mejorar.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        mejorar.Visibility = Visibility.Visible;
+                        Mejorar.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+
+            else
+            {
+                PriceText.Text = "Precio " + 10;
+                if (gold >= 10)
+                {
+                    Desbloquear.Visibility = Visibility.Visible;
+                    desbloquear.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    desbloquear.Visibility = Visibility.Visible;
+                    Desbloquear.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            
+        }
+
+        private void SecondBackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            BichinClickao = null;
+
+            Mejorar.Visibility = Visibility.Collapsed;
+            mejorar.Visibility = Visibility.Collapsed;
+            Desbloquear.Visibility = Visibility.Collapsed;
+            desbloquear.Visibility = Visibility.Collapsed;
+            PopUp.Visibility = Visibility.Collapsed;
         }
 
         private void Open_UpgradesMenu(object sender, RoutedEventArgs e)

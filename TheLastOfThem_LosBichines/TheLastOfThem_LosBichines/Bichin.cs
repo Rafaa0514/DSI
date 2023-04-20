@@ -13,6 +13,7 @@ namespace TheLastOfThem_LosBichines
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Group { get; set; }
         public string Imagen { get; set; }
         public Visibility Desbloqueado { get; set; }
         public int Nivel { get; set; }
@@ -29,6 +30,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 0,
                 Name = "PateaPiedras",
+                Group = "Defensa",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-PateaPiedras.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -38,6 +40,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 1,
                 Name = "Escudero",
+                Group = "Defensa",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Escudero.png",
                 Desbloqueado = Visibility.Collapsed,
                 Nivel = 1,
@@ -47,6 +50,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 2,
                 Name = "Loco",
+                Group = "Defensa",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Loco.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -56,6 +60,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 3,
                 Name = "ConstructorBallesta",
+                Group = "Defensa",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorBallesta.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -65,6 +70,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 4,
                 Name = "ConstructorPared",
+                Group = "Defensa",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorPared.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -74,6 +80,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 5,
                 Name = "Trampero",
+                Group = "Defensa",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Trampero.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -81,8 +88,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 6,
+                Id = 0,
                 Name = "MineroPequeño",
+                Group = "Mineros",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-MineroPequeño.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -90,8 +98,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 7,
+                Id = 1,
                 Name = "Minero",
+                Group = "Mineros",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Minero.png",
                 Desbloqueado = Visibility.Collapsed,
                 Nivel = 1,
@@ -99,8 +108,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 8,
+                Id = 2,
                 Name = "MineroGrande",
+                Group = "Mineros",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-MineroGrande.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -108,8 +118,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 9,
+                Id = 0,
                 Name = "Arquero",
+                Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Arquero.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -117,8 +128,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 10,
+                Id = 1,
                 Name = "Espadachin",
+                Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Espadachin.png",
                 Desbloqueado = Visibility.Collapsed,
                 Nivel = 1,
@@ -126,8 +138,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 11,
+                Id = 2,
                 Name = "GymBro",
+                Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-GymBro.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -135,8 +148,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 12,
+                Id = 3,
                 Name = "Bombardero",
+                Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Bombardero.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -144,8 +158,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 13,
+                Id = 4,
                 Name = "Ariete",
+                Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Ariete.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -153,8 +168,9 @@ namespace TheLastOfThem_LosBichines
             },
             new Bichin()
             {
-                Id = 14,
+                Id = 5,
                 Name = "Gorila",
+                Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin Gorila.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,

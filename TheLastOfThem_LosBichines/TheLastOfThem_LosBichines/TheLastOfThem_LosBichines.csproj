@@ -11,7 +11,7 @@
     <AssemblyName>TheLastOfThem_LosBichines</AssemblyName>
     <DefaultLanguage>es-ES</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22000.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -122,6 +122,7 @@
     <Compile Include="BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BotonesBichin.cs" />
     <Compile Include="DefeatScreen.xaml.cs">
       <DependentUpon>DefeatScreen.xaml</DependentUpon>
     </Compile>
@@ -134,6 +135,7 @@
     <Compile Include="MatchMakingPage.xaml.cs">
       <DependentUpon>MatchMakingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bichin.cs" />
     <Compile Include="OnTropeSelected.xaml.cs">
       <DependentUpon>OnTropeSelected.xaml</DependentUpon>
     </Compile>
@@ -153,6 +155,7 @@
     <Compile Include="VictoryScreen.xaml.cs">
       <DependentUpon>VictoryScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewBichin.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -162,6 +165,7 @@
   <ItemGroup>
     <Content Include="Assets\Images\arrowSymbol.png" />
     <Content Include="Assets\Images\Atras.png" />
+    <Content Include="Assets\Images\arrowSymbol.png" />
     <Content Include="Assets\Images\Bichines\Bichin Gorila.png" />
     <Content Include="Assets\Images\Bichines\Bichin-Ariete.png" />
     <Content Include="Assets\Images\Bichines\Bichin-Arquero.png" />
@@ -180,22 +184,17 @@
     <Content Include="Assets\Images\blockedSymbol.png" />
     <Content Include="Assets\Images\Dinero.png" />
     <Content Include="Assets\Images\DineroNegro.png" />
+    <Content Include="Assets\Images\GrayButton.png" />
     <Content Include="Assets\Images\GreenButton.png" />
     <Content Include="Assets\Images\hojita.png" />
     <Content Include="Assets\Images\noFillStarSymbol.png" />
+    <Content Include="Assets\Images\Popup.png" />
     <Content Include="Assets\Images\post-it rosa.png" />
     <Content Include="Assets\Images\RedButton.png" />
     <Content Include="Assets\Images\starSymbol.png" />
     <Content Include="Assets\Images\tablero.png" />
     <Content Include="Assets\Images\upgradeSymbol.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

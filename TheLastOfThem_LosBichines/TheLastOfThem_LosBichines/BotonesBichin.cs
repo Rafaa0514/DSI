@@ -21,6 +21,7 @@ namespace TheLastOfThem_LosBichines
         public Visibility Bloqueado { get; set; }
         public Visibility Mejorable { get; set; }
         public int Nivel { get; set; }
+        public bool Disponible { get; set; }
 
         public BotonBichin() { }
     }
@@ -40,6 +41,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -52,6 +54,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Collapsed,
                 Mejorable = Visibility.Visible,
                 Nivel = 1,
+                Disponible = true,
             },
             new BotonBichin()
             {
@@ -64,6 +67,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -76,6 +80,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -88,6 +93,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -100,6 +106,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -112,6 +119,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -124,6 +132,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Collapsed,
                 Mejorable = Visibility.Visible,
                 Nivel = 1,
+                Disponible = true,
             },
             new BotonBichin()
             {
@@ -136,6 +145,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -148,6 +158,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -160,6 +171,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Collapsed,
                 Mejorable = Visibility.Visible,
                 Nivel = 1,
+                Disponible = true,
             },
             new BotonBichin()
             {
@@ -172,6 +184,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -184,6 +197,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -196,6 +210,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
             new BotonBichin()
             {
@@ -208,6 +223,7 @@ namespace TheLastOfThem_LosBichines
                 Bloqueado = Visibility.Visible,
                 Mejorable = Visibility.Collapsed,
                 Nivel = 1,
+                Disponible = false,
             },
         };
 
@@ -238,6 +254,7 @@ namespace TheLastOfThem_LosBichines
             Bloqueado = b.Bloqueado;
             Mejorable = b.Mejorable;
             Nivel = b.Nivel;
+            Disponible = b.Disponible;
 
             img = new Image();
             string s = System.IO.Directory.GetCurrentDirectory() + "\\" + b.Imagen;

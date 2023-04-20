@@ -40,6 +40,9 @@
                 <Setter Property="Stretch" Value="Fill"/>
             </Style>
         </ResourceDictionary>
+
         
+
     </Application.Resources>
+
 </Application>
