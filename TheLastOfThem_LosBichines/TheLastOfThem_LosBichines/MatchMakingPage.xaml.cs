@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,32 @@ namespace TheLastOfThem_LosBichines
     /// </summary>
     public sealed partial class MatchMakingPage : Page
     {
+        private DispatcherTimer _timer;
+        int value;
+
         public MatchMakingPage()
         {
-            this.InitializeComponent();
+            value = 0;
+            this.InitializeComponent(); 
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
+
+            _timer.Tick += (sender, o) => {
+                if (value >= 0 && value <= 95) value += 5;
+                else if (value > 95) value = 100;
+                Barra.Value = value;
+                if (value == 100) { GoToBattlePage(); value = -1; }
+            };
+            _timer.Start();
+        }
+
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack) Frame.GoBack();
+        }
+
+        private void GoToBattlePage()
+        {
+            Frame.Navigate(typeof(BattlePage));
         }
     }
 }

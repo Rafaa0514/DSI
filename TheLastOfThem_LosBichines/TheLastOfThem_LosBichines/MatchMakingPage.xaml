@@ -40,9 +40,10 @@
 
         <!--Barra de carga y boton-->
         <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ProgressBar Width="1200" Height="140" Value="63" Foreground="#fad2e0" BorderThickness="4"></ProgressBar>
+            <ProgressBar x:Name="Barra" Width="1200" Height="140" Value="1" Maximum="100" Foreground="#fad2e0" BorderThickness="4"
+                         />
             <Button Width="400" Style="{StaticResource GreenButton}" Name="Cancelar" FontFamily="{StaticResource Fuente}"
-                    Foreground="Black" FontWeight="ExtraBold" Margin="0,20" HorizontalAlignment="Center"></Button>
+                    Foreground="Black" FontWeight="ExtraBold" Margin="0,20" HorizontalAlignment="Center" Click="CancelButtonClick"/>
         </StackPanel>
 
         <!--Consejo al jugador-->

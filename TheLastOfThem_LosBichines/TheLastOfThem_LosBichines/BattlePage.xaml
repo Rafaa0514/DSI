@@ -22,20 +22,26 @@
             </Setter>
         </Style>
 
-        <Style TargetType="ContentControl" x:Key="Bichin">
-            <Setter Property="Width" Value="90"/>
-            <Setter Property="Height" Value="90"/>
-            <Setter Property="Margin" Value="10,0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ContentControl">
-                        <Image Source="{TemplateBinding Name}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <DataTemplate x:Key="BichinVM" x:DataType="local:VMBichin">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" CanDrag="{Binding Seleccionable}"
+                  DragStarting="OnItemDrag">
+                <Rectangle Fill="White" Height="65" Width="65"/>
+                <Image Source="{x:Bind Imagen}" Width="65"/>
+                <Rectangle Fill="Black" Height="65" Width="65" Opacity="0.7" Visibility="{Binding Desbloqueado}"/>
+            </Grid>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="BotonBichin" x:DataType="local:VMBButton">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle Fill="White" Height="80" Width="80"/>
+                <Image Source="{x:Bind Imagen}" Width="80"/>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -46,28 +52,32 @@
         <Image Style="{StaticResource Background}" Grid.RowSpan="2"/>
 
         <!--Imagen de tablero-->
-        <Image Source="/Assets/Images/tablero.png" Margin="40,40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Image Source="/Assets/Images/tablero.png" Margin="40,40" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1479"/>
+        <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="1479" Height="622" x:Name="MiCanvas" 
+                AllowDrop="True" DragOver="DraggingOverCanvas" Drop="DropOnCanvas" KeyDown="ItemKeyDown"/>
+
         <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Top" Value="59" Maximum="100" Width="200" 
-                     Height="30" Margin="85, 250" Foreground="#d1ee91" BorderBrush="Black" BorderThickness="1"/>
+                     Height="30" Margin="240, 200" Foreground="#d1ee91" BorderBrush="Black" BorderThickness="1"/>
         <ProgressBar HorizontalAlignment="Right" VerticalAlignment="Top" Value="67" Maximum="100" Width="200" 
-                     Height="30" Margin="85, 250" Foreground="#e93578" BorderBrush="Black" BorderThickness="1"/>
+                     Height="30" Margin="240, 200" Foreground="#e93578" BorderBrush="Black" BorderThickness="1"/>
 
         <!--Barras de vida de las torres-->
-        
+
 
         <!--Informacion Izq-->
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30,30" HorizontalAlignment="Left" VerticalAlignment="center">
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30,10" HorizontalAlignment="Left" VerticalAlignment="Center">
             <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="Bichines&#x0a;en batalla"
                        HorizontalAlignment="Center"/>
-            <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="Black" Text="0 / 16" FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
-            <Button Style="{ThemeResource GreenButton}" Width="200" HorizontalAlignment="Center"
-                    Name="AUMENTAR" Foreground="Black" FontFamily="{StaticResource Fuente}"/>
+            <TextBlock x:Name="InfoTropes" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="Black" Text="Nada" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+            <Button Style="{ThemeResource GreenButton}" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Name="Aumentar" Foreground="Black" FontFamily="{StaticResource Fuente}" Click="MoreTropes"/>
         </StackPanel>
 
         <!--Informacion Der-->
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,30" HorizontalAlignment="Right" VerticalAlignment="center">
-            <Grid>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30,20" HorizontalAlignment="Right" VerticalAlignment="Center">
+
+            <Grid x:Name="InformacionDinero">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -77,19 +87,22 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Image Source="/Assets/Images/Dinero.png" Stretch="Fill" Width="85" Height="85" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                <Image Source="/Assets/Images/Dinero.png" Stretch="Fill" Width="65" Height="65" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
 
-                <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="33 Oro"
+                <TextBlock x:Name="Gold" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="Oro"
                            Grid.Column="1"/>
-                <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="3 Oro/s"
+                <TextBlock x:Name="GoldPerSecond" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#de6aa5" Text="Oro/s"
                            Grid.Column="1" Grid.Row="1"/>
             </Grid>
+
             <Button Margin="20,20" Style="{ThemeResource GreenButton}" Width="200" HorizontalAlignment="Center"
                     Name="MEJORAS" Foreground="Black" FontFamily="{StaticResource Fuente}" Click="Open_UpgradesMenu"/>
+
         </StackPanel>
-        
+
         <!--Panel de Tropas-->
-        <Rectangle Fill="#f6a2bf" Grid.Row="1" HorizontalAlignment="Center" Width="1000" Height="240"/>
+        
+        <!--uausn
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
@@ -107,25 +120,59 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Rectangle Height="65" Width="65" Fill="White" />
-                    <Rectangle Height="65" Grid.Column="1" Width="65" Fill="White" />
-                    <Rectangle Height="65" Grid.Column="2" Width="65" Fill="White" />
-                    <Rectangle Height="65" Grid.Row="1" Width="65" Fill="White" />
-                    <Rectangle Height="65" Grid.Row="1" Grid.Column="1" Width="65" Fill="White" />
-                    <Rectangle Height="65" Grid.Row="1" Grid.Column="2" Width="65" Fill="White" />
-                    
-                    <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-PateaPiedras.png"/>
-                    <Image Margin="10" Width="65" Grid.Column="1" Source="/Assets/Images/Bichines/Bichin-Escudero.png"/>
-                    <Image Margin="10" Width="65" Grid.Column="2" Source="/Assets/Images/Bichines/Bichin-Loco.png"/>
-                    <Image Margin="10" Width="65" Grid.Row="1" Source="/Assets/Images/Bichines/Bichin-ConstructorBallesta.png"/>
-                    <Image Margin="10" Width="65" Grid.Row="1" Grid.Column="1" Source="/Assets/Images/Bichines/Bichin-ConstructorPared.png"/>
-                    <Image Margin="10" Width="65" Grid.Row="1" Grid.Column="2" Source="/Assets/Images/Bichines/Bichin-Trampero.png"/>
+                    <ContentControl x:Uid="0" CanDrag="True" DragStarting="OnItemDrag" IsTabStop="True" 
+                                    IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-PateaPiedras.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="1" Grid.Column="1" CanDrag="True" DragStarting="OnItemDrag" IsTabStop="True" 
+                                    IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Escudero.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="2" Grid.Column="2" CanDrag="True" DragStarting="OnItemDrag" IsTabStop="True" 
+                                    IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Loco.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="3" Grid.Row="1" CanDrag="True" DragStarting="OnItemDrag" IsTabStop="True" 
+                                    IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-ConstructorBallesta.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="4" Grid.Row="1" Grid.Column="1" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-ConstructorPared.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="5" Grid.Row="1" Grid.Column="2" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Trampero.png"/>
+                        </Grid>
+                    </ContentControl>
                 </Grid>
             </StackPanel>
-            
+
             <Line Stroke="#e93578" Y1="200" StrokeThickness="3" VerticalAlignment="Center"/>
 
-            <StackPanel Orientation="Vertical" Margin="20,0" VerticalAlignment="Center"> 
+            <StackPanel Orientation="Vertical" Margin="20,0" VerticalAlignment="Center">
                 <TextBlock Margin="20,0" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#e93578" Text="Mineros"
                            HorizontalAlignment="Center"/>
                 <Grid>
@@ -139,17 +186,35 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Rectangle Fill="White" Height="65" Width="65" />
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Column="1"/>
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Row="1" Grid.ColumnSpan="2"/>
-                    <Image Margin="20,10" Width="65" Source="/Assets/Images/Bichines/Bichin-MineroPequeño.png"/>
-                    <Image Margin="20,10" Grid.Column="1" Width="65" Source="/Assets/Images/Bichines/Bichin-Minero.png"/>
-                    <Image Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Width="65" Source="/Assets/Images/Bichines/Bichin-MineroGrande.png"/>
+                    <ContentControl x:Uid="6" VerticalAlignment="Center" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-MineroPequeño.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="7" Grid.Column="1" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Minero.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="8" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center"
+                                    CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-MineroGrande.png"/>
+                        </Grid>
+                    </ContentControl>
                 </Grid>
             </StackPanel>
-            
+
             <Line Stroke="#e93578" Y1="200" StrokeThickness="3" VerticalAlignment="Center"/>
-            
+
             <StackPanel Margin="20,0" VerticalAlignment="Center">
                 <TextBlock FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#e93578" Text="Ataque"
                            HorizontalAlignment="Center"/>
@@ -165,24 +230,424 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Rectangle Fill="White" Height="65" Width="65" />
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Column="1"/>
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Column="2"/>
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Row="1"/>
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Row="1" Grid.Column="1"/>
-                    <Rectangle Fill="White" Height="65" Width="65" Grid.Row="1" Grid.Column="2"/>
-                    <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Arquero.png"/>
-                    <Image Margin="10" Width="65" Grid.Column="1" Source="/Assets/Images/Bichines/Bichin-Espadachin.png"/>
-                    <Image Margin="10" Width="65" Grid.Column="2" Source="/Assets/Images/Bichines/Bichin-Gymbro.png"/>
-                    <Image Margin="10" Height="65" Grid.Row="1" Source="/Assets/Images/Bichines/Bichin-Bombardero.png"/>
-                    <Image Margin="10" Width="65" Grid.Row="1" Grid.Column="1" Source="/Assets/Images/Bichines/Bichin-Ariete.png"/>
-                    <Image Margin="10" Width="65" Grid.Row="1" Grid.Column="2" Source="/Assets/Images/Bichines/Bichin Gorila.png"/>
+                    <ContentControl x:Uid="9" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Arquero.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="10" Grid.Column="1" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Espadachin.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="11" Grid.Column="2" VerticalAlignment="Center" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Gymbro.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="12" Grid.Row="1" VerticalAlignment="Center" CanDrag="True" DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Height="65" Source="/Assets/Images/Bichines/Bichin-Bombardero.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="13" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" CanDrag="True" 
+                                    DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin-Ariete.png"/>
+                        </Grid>
+                    </ContentControl>
+
+                    <ContentControl x:Uid="14" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" CanDrag="True" 
+                                    DragStarting="OnItemDrag" 
+                                    IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+                        <Grid>
+                            <Rectangle Height="65" Width="65" Fill="White" />
+                            <Image Margin="10" Width="65" Source="/Assets/Images/Bichines/Bichin Gorila.png"/>
+                        </Grid>
+                    </ContentControl>
                 </Grid>
             </StackPanel>
-            
+
         </StackPanel>
+-->
+
+        <Grid x:Name="PanelTropas" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#f6a2bf" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="180"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Margin="20,0" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#e93578" Text="Defensa" 
+                           HorizontalAlignment="Center"/>
+
+            <TextBlock Grid.Column="2" Margin="20,0" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#e93578" Text="Mineros" 
+                           HorizontalAlignment="Center"/>
+
+            <TextBlock Grid.Column="4" Margin="20,0" FontFamily="{StaticResource Fuente}" FontSize="30" Foreground="#e93578" Text="Ataque" 
+                           HorizontalAlignment="Center"/>
+
+            <GridView x:Name="Defensas" Margin="20" Grid.Row="1" ItemsSource="{x:Bind BichinesDefensa}" ItemTemplate="{StaticResource BichinVM }" 
+                  VerticalAlignment="Center" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                  IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True"/>
+
+
+
+            <Line Grid.Row="1" Grid.Column="1" Stroke="#e93578" Y1="100" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+
+            <GridView x:Name="Mineros" Margin="20" Grid.Row="2" Grid.Column="2" ItemsSource="{x:Bind BichinesMineros}"
+                  ItemTemplate="{StaticResource BichinVM }"
+                  VerticalAlignment="Center" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                  IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True">
+            </GridView>
+
+            <Line Grid.Row="1" Grid.Column="3" Stroke="#e93578" Y1="100" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+
+            <GridView x:Name="Atacantes" Margin="20" Grid.Row="1" Grid.Column="4" ItemsSource="{x:Bind BichinesAtaque}"
+                  ItemTemplate="{StaticResource BichinVM }" HorizontalAlignment="Stretch"
+                  VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                  IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True" />
+        </Grid>
 
         <Frame x:Name="UpgradeMenu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"/>
 
+        <Grid x:Name="UpgradesMenu" Grid.RowSpan="2" Visibility="Collapsed">
+            <Rectangle Fill="Black" Stretch="Fill" Opacity="0.6"/>
+            <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image Source="/Assets/Images/arrowSymbol.png" Width="100" Margin="350, 200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource Fuente}" FontSize="70" Text="-Mejoras-" HorizontalAlignment="Center"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Margin="10, 5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Width="80" Height="80" Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="80" Source="/Assets/Images/Bichines/Bichin-ConstructorBallesta.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,0" VerticalAlignment="Top"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Escudero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="2" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Source="/Assets/Images/Bichines/Bichin-MineroPequeño.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="2" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Column="3" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Arquero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Grid Grid.Column="4" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Bombardero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,5"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-ConstructorPared.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="1" Foreground="#de6aa5" FontSize="20" Margin="5,5"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Loco.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="2" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Minero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="3" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="3" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Espadachin.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="1" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Column="2" Source="Assets/Images/upgradeSymbol.png" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="4" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Ariete.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Source="/Assets/Images/Bichines/Bichin-Trampero.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="1" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-PateaPiedras.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="2" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Source="/Assets/Images/Bichines/Bichin-MineroGrande.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Rectangle Fill="Black"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.6"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/blockedSymbol.png" Height="30" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="3" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin-Gymbro.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="1" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/upgradeSymbol.png" Height="25" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="4" Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Fill="White"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <Image Width="100" Height="100" Source="/Assets/Images/Bichines/Bichin Gorila.png" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                        <TextBlock FontFamily="{StaticResource Fuente}" Text="2" Foreground="#de6aa5" FontSize="20" Margin="5,0"/>
+                        <Image Grid.Row="2" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="/Assets/Images/StarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Row="2" Grid.Column="2" Source="/Assets/Images/noFillStarSymbol.png" Height="20" VerticalAlignment="Bottom"/>
+                        <Image Grid.Column="2" Source="/Assets/Images/upgradeSymbol.png" Height="25" VerticalAlignment="Top"/>
+                    </Grid>
+
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Images/DineroNegro.png" Width="90"/>
+
+                    <TextBlock Margin="20,0" Text="33 oro" Foreground="Black" FontFamily="{StaticResource Fuente}" FontSize="70" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+        
+        
+        
     </Grid>
+
 </Page>
