@@ -92,8 +92,8 @@ namespace TheLastOfThem_LosBichines
             new BotonBichin()
             {
                 Id = 5,
-                Name = "Tramposo",
-                Imagen = "Assets\\Images\\Bichines\\Bichin-Tramposo.png",
+                Name = "Trampero",
+                Imagen = "Assets\\Images\\Bichines\\Bichin-Trampero.png",
                 BotonBloqueado = "Assets\\Images\\blockedSymbol.png",
                 BotonMejorar = "Assets\\Images\\upgradeSymbol.png",
                 Sombra = Visibility.Visible,
@@ -105,7 +105,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 6,
                 Name = "MineroPequeño",
-                Imagen = "Assets\\Images\\Bichines\\Bichin-PateaPiedras.png",
+                Imagen = "Assets\\Images\\Bichines\\Bichin-MineroPequeño.png",
                 BotonBloqueado = "Assets\\Images\\blockedSymbol.png",
                 BotonMejorar = "Assets\\Images\\upgradeSymbol.png",
                 Sombra = Visibility.Visible,

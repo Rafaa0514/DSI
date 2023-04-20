@@ -34,6 +34,8 @@ namespace TheLastOfThem_LosBichines
         public ObservableCollection<VMBichin> BichinesMineros { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesAtaque { get; } = new ObservableCollection<VMBichin>();
 
+        public ObservableCollection<VMBButton> BotonesBichines { get; } = new ObservableCollection<VMBButton>();
+
         private DispatcherTimer _timer;
         // Variables de tropas
         int currentTropes, maxtropes, goldNeeded, increaseCost, max;
@@ -61,6 +63,7 @@ namespace TheLastOfThem_LosBichines
             _timer.Tick += (sender, o) => {
                 gold += goldPS;
                 Gold.Text = gold.ToString() + " Oro";
+                OtroTextoDinero.Text = gold.ToString() + " Oro";
                 matchDuration++;
             };
 
@@ -68,6 +71,11 @@ namespace TheLastOfThem_LosBichines
 
             GoldPerSecond.Text = goldPS.ToString() + " Oro/s";
             InfoTropes.Text = currentTropes.ToString() + " / " + maxtropes.ToString();
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            UpgradesMenu.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -100,6 +108,15 @@ namespace TheLastOfThem_LosBichines
                     VMBichin VMitem = new VMBichin(d);
                     BichinesAtaque.Add(VMitem);
                 }
+
+            if (BotonesBichines != null)
+            {
+                foreach(BotonBichin bb in ButtonModel.GetAllButtons())
+                {
+                    VMBButton VMitem = new VMBButton(bb);
+                    BotonesBichines.Add(VMitem);
+                }
+            }
             base.OnNavigatedTo(e);
         }
 
@@ -138,6 +155,7 @@ namespace TheLastOfThem_LosBichines
             }
             InfoTropes.Text = currentTropes.ToString() + " / " + maxtropes.ToString();
             Gold.Text = gold.ToString() + " Oro";
+            OtroTextoDinero.Text = gold.ToString() + " Oro";
         }
     }
 }
