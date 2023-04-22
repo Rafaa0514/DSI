@@ -25,6 +25,7 @@ namespace TheLastOfThem_LosBichines
             Desbloqueado = b.Desbloqueado;
             Seleccionable = b.Seleccionable;
             Nivel = b.Nivel;
+            Group = b.Group;
 
             img = new Image();
             string s = System.IO.Directory.GetCurrentDirectory() + "\\" + b.Imagen;

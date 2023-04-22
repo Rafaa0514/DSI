@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.ServiceModel.Channels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -29,17 +31,20 @@ namespace TheLastOfThem_LosBichines
 
     public sealed partial class BattlePage : Page
     {
-
+        // Referencia a la tropa que seleccionamos en el Menu de mejoras
         VMBButton BichinClickao;
 
+        // Listas de Bichines (Panel de tropas y Panel de Botones del Menu de mejoras)
         public ObservableCollection<VMBichin> ListaBichines { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesDefensa { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesMineros { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesAtaque { get; } = new ObservableCollection<VMBichin>();
-
         public ObservableCollection<VMBButton> BotonesBichines { get; } = new ObservableCollection<VMBButton>();
 
+        // Timers
         private DispatcherTimer _timer;
+        private DispatcherTimer _updateTimer;
+
         // Variables de tropas
         int currentTropes, maxtropes, goldNeeded, increaseCost, max;
 
@@ -56,18 +61,18 @@ namespace TheLastOfThem_LosBichines
         {
             this.InitializeComponent();
 
+            // Inicializamos variables
             BichinClickao = null;
-
             currentTropes = gold = deployedTropes = killedTropes = matchDuration = 0;
             maxtropes = 16;
             goldPS = 1;
             goldNeeded = 15;
             increaseCost = 15;
             max = 32;
-
             isActive = Visibility.Collapsed;
             PopUp.Visibility = isActive;
 
+            // Inicializamos timers y les añadimos su funcion
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += (sender, o) => {
                 gold += goldPS;
@@ -75,9 +80,13 @@ namespace TheLastOfThem_LosBichines
                 OtroTextoDinero.Text = gold.ToString() + " Oro";
                 matchDuration++;
             };
-
             _timer.Start();
 
+            _updateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.2) };
+            _updateTimer.Tick += (sender, o) => { checkButtons(); };
+            _updateTimer.Start();
+
+            // Mostramos textos iniciales del HUD
             GoldPerSecond.Text = goldPS.ToString() + " Oro/s";
             InfoTropes.Text = currentTropes.ToString() + " / " + maxtropes.ToString();
         }
@@ -119,133 +128,7 @@ namespace TheLastOfThem_LosBichines
             base.OnNavigatedTo(e);
         }
 
-        private void OnItemDrag(UIElement sender, DragStartingEventArgs args)
-        {
-
-        }
-
-        private void DropOnCanvas(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void upgradeTrope(object sender, RoutedEventArgs e)
-        {
-            gold -= BichinClickao.Nivel * 10;
-            Gold.Text = gold.ToString() + " Oro";
-
-            //foreach (VMBButton bichin in BotonesBichines)
-            //{
-            //    if (bichin.Name == BichinClickao.Name)
-            //    {
-            //        bichin.Nivel++;
-            //        GridViewItem gv = PanelBotones.Items[bichin.Id] as GridViewItem;
-            //        Grid g = PanelBotones.Items[bichin.Id] as Grid;
-            //        ((TextBlock)g.Children[3]).Text = bichin.Nivel.ToString();
-            //    }
-            //}
-        }
-
-        private void unlockTrope(object sender, RoutedEventArgs e)
-        {
-            gold -= 10;
-            Gold.Text = gold.ToString() + " Oro";
-            Grid g = null;
-
-            //foreach(VMBichin bichin in ListaBichines)
-            //{
-            //    if (bichin.Name == BichinClickao.Name)
-            //    {
-            //        bichin.Desbloqueado = Visibility.Collapsed;
-            //        if (bichin.Group == "Defensas")
-            //        {
-            //            BichinesDefensa[bichin.Id].Seleccionable = true;
-            //        }
-            //    }
-            //}
-        }
-
-        private void DraggingOverCanvas(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void ItemKeyDown(object sender, KeyRoutedEventArgs e)
-        {
-
-        }
-
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            BichinClickao = null;
-            Mejorar.Visibility = Visibility.Collapsed;
-            mejorar.Visibility = Visibility.Collapsed;
-            Desbloquear.Visibility = Visibility.Collapsed;
-            desbloquear.Visibility = Visibility.Collapsed;
-            PopUp.Visibility = Visibility.Collapsed;
-            UpgradesMenu.Visibility = Visibility.Collapsed;
-        }
-
-        private void ClickOnTropeButton(object sender, ItemClickEventArgs e)
-        {
-            VMBButton b = e.ClickedItem as VMBButton;
-            BichinClickao = b;
-            isActive = Visibility.Visible;
-            PopUp.Visibility = isActive;
-            
-            if (b.Disponible == true)
-            {
-                if (b.Nivel < 3)
-                {
-                    int coste = 10 * b.Nivel;
-                    PriceText.Text = "Precio " + coste;
-                    if (gold >= coste)
-                    {
-                        Mejorar.Visibility = Visibility.Visible;
-                        mejorar.Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        mejorar.Visibility = Visibility.Visible;
-                        Mejorar.Visibility = Visibility.Collapsed;
-                    }
-                }
-            }
-
-            else
-            {
-                PriceText.Text = "Precio " + 10;
-                if (gold >= 10)
-                {
-                    Desbloquear.Visibility = Visibility.Visible;
-                    desbloquear.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    desbloquear.Visibility = Visibility.Visible;
-                    Desbloquear.Visibility = Visibility.Collapsed;
-                }
-            }
-
-            
-        }
-
-        private void SecondBackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            BichinClickao = null;
-
-            Mejorar.Visibility = Visibility.Collapsed;
-            mejorar.Visibility = Visibility.Collapsed;
-            Desbloquear.Visibility = Visibility.Collapsed;
-            desbloquear.Visibility = Visibility.Collapsed;
-            PopUp.Visibility = Visibility.Collapsed;
-        }
-
-        private void Open_UpgradesMenu(object sender, RoutedEventArgs e)
-        {
-            UpgradesMenu.Visibility = Visibility.Visible;
-        }
-
+        // Funcion que aumenta el numero de tropas
         private void MoreTropes(object sender, RoutedEventArgs e)
         {
             if (maxtropes < max && gold >= goldNeeded)
@@ -257,6 +140,212 @@ namespace TheLastOfThem_LosBichines
             InfoTropes.Text = currentTropes.ToString() + " / " + maxtropes.ToString();
             Gold.Text = gold.ToString() + " Oro";
             OtroTextoDinero.Text = gold.ToString() + " Oro";
+        }
+
+        // Funcion para cuando queremos arrastrar una tropa
+        private void OnItemDrag(UIElement sender, DragStartingEventArgs args)
+        {
+
+        }
+
+        // Funcion para cuando soltamos una tropa en el tablero
+        private void DropOnCanvas(object sender, DragEventArgs e)
+        {
+
+        }
+
+        // Metodo para mejorar Tropas en el menu de mejoras
+        private void upgradeTrope(object sender, RoutedEventArgs e)
+        {
+            // Resto oro en funcion del nivel
+            gold -= BichinClickao.Nivel * 10;
+            Gold.Text = gold.ToString() + " Oro";
+
+            // Recorro los elementos del GridView buscando la tropa que quiero mejorar
+            for (int i = 0; i < BotonesBichines.Count; i++)
+            {
+                if (BotonesBichines[i].Name == BichinClickao.Name) {
+                    BotonesBichines[i].Nivel++;
+                    PanelBotones.ItemsSource = null;
+                    PanelBotones.ItemsSource = BotonesBichines; 
+                }
+            }
+            // Actualizo el boton de mejorar si tengo dinero para mejorarlo otra vez
+            if (BichinClickao.Nivel + 1 * 10 > gold) { Mejorar.Visibility = Visibility.Collapsed; mejorar.Visibility = Visibility.Visible; }
+        }
+
+        // Metodo para desbloquear Tropas en el menu de mejoras
+        private void unlockTrope(object sender, RoutedEventArgs e)
+        {
+            // Reduzco el dinero del jugador
+            gold -= 10;
+            Gold.Text = gold.ToString() + " Oro";
+
+
+            bool found = false;
+            int i = 0;
+            // Busco mi tropa
+            while (!found && i < BotonesBichines.Count)
+            {
+                // Si la encuentro
+                if (BotonesBichines[i].Name == BichinClickao.Name)
+                {
+                    // Cambio sus elementos (dejo de mostrarlo como bloqueado)
+                    BotonesBichines[i].Sombra = Visibility.Collapsed;
+                    BotonesBichines[i].Mejorable = Visibility.Visible;
+                    BotonesBichines[i].Bloqueado = Visibility.Collapsed;
+                    BotonesBichines[i].Disponible = true;
+
+                    // Busco la misma tropa pero en el GridView de arrastre
+                    bool found2 = false;
+                    int j = 0;
+                    while (!found2 && j < ListaBichines.Count)
+                    {
+                        // Si la encuentro
+                        if (ListaBichines[j].Name == BichinClickao.Name)
+                        {
+                            // Dependiendo del grupo que sea modifico en un GridView u otro (actualizo el itemsSource)
+                            switch (ListaBichines[j].Group)
+                            {
+                                case "Defensas":
+                                    {
+                                        BichinesDefensa[ListaBichines[j].Id].Desbloqueado = Visibility.Collapsed;
+                                        BichinesDefensa[ListaBichines[j].Id].Seleccionable = true;
+                                        Defensas.ItemsSource = null;
+                                        Defensas.ItemsSource = BichinesDefensa;
+                                    }
+                                    break;
+                                case "Mineros":
+                                    {
+                                        BichinesMineros[ListaBichines[j].Id].Desbloqueado = Visibility.Collapsed;
+                                        BichinesMineros[ListaBichines[j].Id].Seleccionable = true;
+                                        Mineros.ItemsSource = null;
+                                        Mineros.ItemsSource = BichinesMineros;
+                                    }
+                                    break;
+                                case "Atacantes":
+                                    {
+                                        BichinesAtaque[ListaBichines[j].Id].Desbloqueado = Visibility.Collapsed;
+                                        BichinesAtaque[ListaBichines[j].Id].Seleccionable = true;
+                                        Atacantes.ItemsSource = null;
+                                        Atacantes.ItemsSource = BichinesAtaque;
+                                    }
+                                    break;
+                            }
+
+                            found2 = true;
+                        }
+                        else j++;
+                    }
+                    // Actualizo el itemsSource de mi GridView
+                    PanelBotones.ItemsSource = null;
+                    PanelBotones.ItemsSource = BotonesBichines;
+
+                    found = true;
+                }
+
+                else i++;
+            }
+        }
+
+        // Metodo para cuando estas arrastrando una tropa sobre el tablero
+        private void DraggingOverCanvas(object sender, DragEventArgs e)
+        {
+
+        }
+
+        // Metodo para cuando tecleo teniendo una tropa sobre el tablero
+        private void ItemKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+
+        }
+
+        // Funcion q abre el menu de mejoras
+        private void Open_UpgradesMenu(object sender, RoutedEventArgs e)
+        {
+            UpgradesMenu.Visibility = Visibility.Visible;
+        }
+
+        // Funcion para quitar el menu de mejoras
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            BichinClickao = null;
+            Mejorar.Visibility = Visibility.Collapsed;
+            mejorar.Visibility = Visibility.Collapsed;
+            Desbloquear.Visibility = Visibility.Collapsed;
+            desbloquear.Visibility = Visibility.Collapsed;
+            PopUp.Visibility = Visibility.Collapsed;
+            UpgradesMenu.Visibility = Visibility.Collapsed;
+        }
+
+        // Funcion para desplegar el popUp de mejorar al clicar sobre una tropa en el Menu de Mejoras
+        private void ClickOnTropeButton(object sender, ItemClickEventArgs e)
+        {
+            VMBButton b = e.ClickedItem as VMBButton;
+            BichinClickao = b;
+            isActive = Visibility.Visible;
+            PopUp.Visibility = isActive;
+        }
+
+        // Funcion que comprueba que boton enseñar en el popUp de tropa
+        private void checkButtons()
+        {
+            if (BichinClickao != null)
+            {
+                if (BichinClickao.Disponible)
+                {
+                    Desbloquear.Visibility = Visibility.Collapsed;
+                    desbloquear.Visibility = Visibility.Collapsed;
+
+                    if (BichinClickao.Nivel < 3)
+                    {
+                        int coste = 10 * BichinClickao.Nivel;
+                        PriceText.Text = "Precio " + coste;
+
+                        if (gold >= coste)
+                        {
+                            Mejorar.Visibility = Visibility.Visible;
+                            mejorar.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            mejorar.Visibility = Visibility.Visible;
+                            Mejorar.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+                else
+                {
+                    Mejorar.Visibility = Visibility.Collapsed;
+                    mejorar.Visibility = Visibility.Collapsed;
+
+                    int coste = 10 * BichinClickao.Nivel;
+                    PriceText.Text = "Precio " + coste;
+
+                    if (gold >= coste)
+                    {
+                        Desbloquear.Visibility = Visibility.Visible;
+                        desbloquear.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        Desbloquear.Visibility = Visibility.Collapsed;
+                        desbloquear.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+        }
+
+        // Funcion que oculta el popUp de tropa
+        private void SecondBackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            BichinClickao = null;
+
+            Mejorar.Visibility = Visibility.Collapsed;
+            mejorar.Visibility = Visibility.Collapsed;
+            Desbloquear.Visibility = Visibility.Collapsed;
+            desbloquear.Visibility = Visibility.Collapsed;
+            PopUp.Visibility = Visibility.Collapsed;
         }
     }
 }

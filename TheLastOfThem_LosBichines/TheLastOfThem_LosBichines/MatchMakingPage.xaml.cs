@@ -25,18 +25,23 @@ namespace TheLastOfThem_LosBichines
     {
         private DispatcherTimer _timer;
         int value;
+        bool navigated;
 
         public MatchMakingPage()
         {
             value = 0;
+            navigated = false;
             this.InitializeComponent(); 
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.1) };
 
             _timer.Tick += (sender, o) => {
-                if (value >= 0 && value <= 95) value += 5;
-                else if (value > 95) value = 100;
-                Barra.Value = value;
-                if (value == 100) { GoToBattlePage(); value = -1; }
+                if (!navigated)
+                {
+                    if (value >= 0 && value <= 95) value += 5;
+                    else if (value > 95) value = 100;
+                    Barra.Value = value;
+                    if (value == 100) { GoToBattlePage(); value = -1; }
+                }
             };
             _timer.Start();
         }
@@ -49,6 +54,7 @@ namespace TheLastOfThem_LosBichines
         private void GoToBattlePage()
         {
             Frame.Navigate(typeof(BattlePage));
+            navigated = true;
         }
     }
 }

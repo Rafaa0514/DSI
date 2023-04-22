@@ -30,7 +30,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 0,
                 Name = "PateaPiedras",
-                Group = "Defensa",
+                Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-PateaPiedras.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -40,7 +40,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 1,
                 Name = "Escudero",
-                Group = "Defensa",
+                Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Escudero.png",
                 Desbloqueado = Visibility.Collapsed,
                 Nivel = 1,
@@ -50,7 +50,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 2,
                 Name = "Loco",
-                Group = "Defensa",
+                Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Loco.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -60,7 +60,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 3,
                 Name = "ConstructorBallesta",
-                Group = "Defensa",
+                Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorBallesta.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -70,7 +70,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 4,
                 Name = "ConstructorPared",
-                Group = "Defensa",
+                Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorPared.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
@@ -80,7 +80,7 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 5,
                 Name = "Trampero",
-                Group = "Defensa",
+                Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Trampero.png",
                 Desbloqueado = Visibility.Visible,
                 Nivel = 1,
