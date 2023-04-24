@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,11 +23,58 @@ namespace TheLastOfThem_LosBichines
     /// </summary>
     public sealed partial class TropesPage : Page
     {
+
+        // Referencia a la tropa que seleccionamos en el Menu de tropas
+        VMBButton BichinClickao;
+
+        // Listas de Bichines (Panel de tropas)
+        public ObservableCollection<VMBichin> ListaBichines { get; } = new ObservableCollection<VMBichin>();
+        public ObservableCollection<VMBichin> BichinesDefensa { get; } = new ObservableCollection<VMBichin>();
+        public ObservableCollection<VMBichin> BichinesMineros { get; } = new ObservableCollection<VMBichin>();
+        public ObservableCollection<VMBichin> BichinesAtaque { get; } = new ObservableCollection<VMBichin>();
+        public ObservableCollection<VMBButton> BotonesBichines { get; } = new ObservableCollection<VMBButton>();
+
+
         public TropesPage()
         {
             this.InitializeComponent();
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (BichinesDefensa != null)
+                foreach (Bichin d in Model.GetDefenseBichines())
+                {
+                    VMBichin VMitem = new VMBichin(d);
+                    BichinesDefensa.Add(VMitem);
+                    ListaBichines.Add(VMitem);
+                }
 
+            if (BichinesMineros != null)
+                foreach (Bichin d in Model.GetMineBichines())
+                {
+                    VMBichin VMitem = new VMBichin(d);
+                    BichinesMineros.Add(VMitem);
+                    ListaBichines.Add(VMitem);
+                }
+
+            if (BichinesAtaque != null)
+                foreach (Bichin d in Model.GetAttackBichines())
+                {
+                    VMBichin VMitem = new VMBichin(d);
+                    BichinesAtaque.Add(VMitem);
+                    ListaBichines.Add(VMitem);
+                }
+
+            if (BotonesBichines != null)
+            {
+                foreach (BotonBichin bb in ButtonModel.GetAllButtons())
+                {
+                    VMBButton VMitem = new VMBButton(bb);
+                    BotonesBichines.Add(VMitem);
+                }
+            }
+            base.OnNavigatedTo(e);
+        }
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
