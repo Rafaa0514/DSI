@@ -39,6 +39,7 @@ namespace TheLastOfThem_LosBichines
     public class CVBichin : ContentControl
     {
         public string Nombre;
+        public string Group;
         public int id;
         public Grid g;
         public Image img;
@@ -52,6 +53,7 @@ namespace TheLastOfThem_LosBichines
 
             id = b.Id;
             Name = b.Name;
+            Group = b.Group;
 
             rect = new Windows.UI.Xaml.Shapes.Rectangle();
             rect.Fill = new SolidColorBrush(Windows.UI.Colors.White);

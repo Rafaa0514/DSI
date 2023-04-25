@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TheLastOfThem_LosBichines.VictoryScreen"
+    x:Class="TheLastOfThem_LosBichines.EndPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TheLastOfThem_LosBichines"
@@ -27,40 +27,42 @@
         <Image Source="/Assets/Images/hojita.png" Stretch="Fill"/>
         <Rectangle Stretch="Fill" Fill="Black" Opacity="0.5"/>
 
-        <Image Source="/Assets/Images/post-it rosa.png" Height="900"/>
+        <Image Source="/Assets/Images/post-it rosa.png" VerticalAlignment="Stretch"/>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
             <!--Decir al jugador si ha ganado o perdido-->
-            <TextBlock FontFamily="{StaticResource Fuente}" Text="-VICTORIA-" FontSize="85" 
+            <TextBlock x:Name="Titulo" FontFamily="{StaticResource Fuente}" Text="-VICTORIA-" FontSize="85" 
                        FontWeight="ExtraBold" Foreground="#d1ee91" HorizontalAlignment="Center"/>
 
             <!--Mostrar las estadísticas de la partida-->
-            <StackPanel Margin="0,30" Orientation="Horizontal" Name="Columns">
+            <StackPanel Margin="0,30" Orientation="Horizontal" Name="Columns" VerticalAlignment="Stretch">
                 <StackPanel Margin="0,0,30,30" x:Name="Stats" Orientation="Vertical">
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Tropas reclutadas" FontSize="40"
+                    <TextBlock x:Name="TropesStat" FontFamily="{StaticResource Fuente}" Text="Tropas reclutadas" FontSize="40"
                                Foreground="#d1ee91" Margin="0,0,0,10" FontStyle="Italic"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Tropas eliminadas" FontSize="40"
+                    <TextBlock x:Name="TropesntStat" FontFamily="{StaticResource Fuente}" Text="Tropas eliminadas" FontSize="40"
                                Foreground="#d1ee91" Margin="0,0,0,10" FontStyle="Italic"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Oro obtenido" FontSize="40"
+                    <TextBlock x:Name="GoldStat" FontFamily="{StaticResource Fuente}" Text="Oro obtenido" FontSize="40"
                                Foreground="#d1ee91" Margin="0,0,0,10" FontStyle="Italic"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="Tiempo" FontSize="40"
+                    <TextBlock x:Name="TimeStat" FontFamily="{StaticResource Fuente}" Text="Tiempo" FontSize="40"
                                Foreground="#d1ee91" FontStyle="Italic"/>
                 </StackPanel>
 
                 <StackPanel x:Name="Values" Orientation="Vertical">
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="61" FontSize="40"
+                    <TextBlock x:Name="TropesValue" FontFamily="{StaticResource Fuente}" Text="61" FontSize="40"
                                Foreground="#d1ee91" Margin="0,0,0,10" FontStyle="Italic"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="54" FontSize="40"
+                    <TextBlock x:Name="TropesntValue" FontFamily="{StaticResource Fuente}" Text="54" FontSize="40"
                                Foreground="#d1ee91" Margin="0,0,0,10" FontStyle="Italic"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="404" FontSize="40"
+                    <TextBlock x:Name="GoldValue" FontFamily="{StaticResource Fuente}" Text="404" FontSize="40"
                                Foreground="#d1ee91" Margin="0,0,0,10" FontStyle="Italic"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" Text="7 min" FontSize="40"
+                    <TextBlock x:Name="TimeValue" FontFamily="{StaticResource Fuente}" Text="7 min" FontSize="40"
                                Foreground="#d1ee91" FontStyle="Italic"/>
                 </StackPanel>
             </StackPanel>
 
             <Button Width="300" Style="{StaticResource GreenButton}" Name="Aceptar" FontFamily="{StaticResource Fuente}"
-                    Foreground="Black" FontWeight="ExtraBold"  HorizontalAlignment="Center"/>
+                    Foreground="Black" FontWeight="ExtraBold"  HorizontalAlignment="Center"
+                    Click="Leave"/>
+
         </StackPanel>
     </Grid>
 </Page>

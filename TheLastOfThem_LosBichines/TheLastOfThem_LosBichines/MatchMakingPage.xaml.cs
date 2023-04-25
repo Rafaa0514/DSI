@@ -48,7 +48,12 @@ namespace TheLastOfThem_LosBichines
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            if (Frame.CanGoBack) Frame.GoBack();
+            if (Frame.CanGoBack)
+            {
+                value = 0;
+                navigated = true;
+                Frame.GoBack();
+            }
         }
 
         private void GoToBattlePage()
