@@ -43,21 +43,22 @@ namespace TheLastOfThem_LosBichines
         public Windows.UI.Xaml.Shapes.Rectangle rect;
         public CompositeTransform Transformacion;
 
-        public CVBichin(VMBichin b, double x, double y)
+        public CVBichin(VMBichin b, int x, int y, double w, double h)
         {
             g = new Grid();
-            g.Name = Nombre;
+            g.Name = b.Name;
 
             id = b.Id;
             Name = b.Name;
 
+            rect = new Windows.UI.Xaml.Shapes.Rectangle();
+            rect.Fill = new SolidColorBrush(Windows.UI.Colors.White);
+            rect.Width = w; rect.Height = h;
+
             img = new Image();
             img.Source = b.img.Source;
-            img.Width = b.img.Width;
-
-            rect = new Windows.UI.Xaml.Shapes.Rectangle();
-            rect.Fill = new SolidColorBrush(Windows.UI.Colors.Black);
-            rect.Width = rect.Height = 65;
+            img.Width = w;
+            img.Height = h;
 
             g.Children.Add(rect);
             g.Children.Add(img);

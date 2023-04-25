@@ -8,17 +8,22 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.ServiceModel.Channels;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Authentication.OnlineId;
 using Windows.UI;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,8 +36,13 @@ namespace TheLastOfThem_LosBichines
 
     public sealed partial class BattlePage : Page
     {
+        // Constantes
+        const double NUM_ROWS = 11;
+        const double NUM_COLS = 26;
+
         // Referencia a la tropa que seleccionamos en el Menu de mejoras
         VMBButton BichinClickao;
+        VMBichin BichinArrastrao;
 
         // Listas de Bichines (Panel de tropas y Panel de Botones del Menu de mejoras)
         public ObservableCollection<VMBichin> ListaBichines { get; } = new ObservableCollection<VMBichin>();
@@ -63,6 +73,7 @@ namespace TheLastOfThem_LosBichines
 
             // Inicializamos variables
             BichinClickao = null;
+            BichinArrastrao = null;
             currentTropes = gold = deployedTropes = killedTropes = matchDuration = 0;
             maxtropes = 16;
             goldPS = 1;
@@ -143,15 +154,70 @@ namespace TheLastOfThem_LosBichines
         }
 
         // Funcion para cuando queremos arrastrar una tropa
-        private void OnItemDrag(UIElement sender, DragStartingEventArgs args)
+        private void OnItemDrag(object sender, DragItemsStartingEventArgs e)
         {
-
+            // SE SOBREESCRIBE POR
+            VMBichin Item = e.Items[0] as VMBichin;
+            if (Item.Seleccionable)
+            {
+                e.Data.SetText(Item.Name);
+                e.Data.RequestedOperation = DataPackageOperation.Copy;
+                BichinArrastrao = Item;
+            }
+            else
+            {
+                e.Data.RequestedOperation = DataPackageOperation.None;
+            }
         }
 
         // Funcion para cuando soltamos una tropa en el tablero
         private void DropOnCanvas(object sender, DragEventArgs e)
         {
+            Windows.Foundation.Point i = e.GetPosition(MiTablero);
+            double difX = MiTablero.ActualWidth / NUM_COLS;
+            double difY = MiTablero.ActualHeight / NUM_ROWS;
 
+            if (e.Data.RequestedOperation == DataPackageOperation.Copy && 
+                i.X < MiTablero.ActualWidth / 2 - difX * 1.2)
+            {
+                int mulX = Convert.ToInt32(i.X / difX);
+                int mulY = Convert.ToInt32(i.Y / difY);
+                int posX = Convert.ToInt32(mulX * difX + MiTablero.ActualOffset.X);
+                int posY = Convert.ToInt32(mulY * difY + MiTablero.ActualOffset.Y);
+
+                if (IsDroppable(mulX, mulY))
+                {
+                    gold -= 3 + BichinArrastrao.Nivel * 2;
+                    Gold.Text = gold.ToString() + " Oro";
+                    CVBichin newBicho = new CVBichin(BichinArrastrao, posX + 2, posY + 2, difX - 4, difY - 4);
+                    MiCanvas.Children.Add(newBicho);
+                    BichinArrastrao = null;
+                }
+            }
+        }
+
+        //Compruebo si puedo droppear la tropa
+        private bool IsDroppable(int mulX, int mulY)
+        {
+            if (gold >= 3 + BichinArrastrao.Nivel * 2)
+            {
+                if (mulY == NUM_ROWS) return false;
+                if (mulX >= 7 && mulX < 10 && mulY >= 9 && mulY < NUM_ROWS)
+                {
+                    if (BichinArrastrao.Group == "Mineros")
+                    {
+                        goldPS += 1;
+                        GoldPerSecond.Text = goldPS.ToString() + " Oro/s";
+                        return true;
+                    }
+                    else return false;
+                }
+                else if (mulY >= 3 && mulY < 8 && mulX >= 0 && mulX < 5) return false;
+
+                if (BichinArrastrao.Group != "Mineros") return true;
+            }
+
+            return false;
         }
 
         // Metodo para mejorar Tropas en el menu de mejoras
@@ -180,7 +246,6 @@ namespace TheLastOfThem_LosBichines
             // Reduzco el dinero del jugador
             gold -= 10;
             Gold.Text = gold.ToString() + " Oro";
-
 
             bool found = false;
             int i = 0;
@@ -251,13 +316,13 @@ namespace TheLastOfThem_LosBichines
         // Metodo para cuando estas arrastrando una tropa sobre el tablero
         private void DraggingOverCanvas(object sender, DragEventArgs e)
         {
-
+            e.AcceptedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
         }
 
         // Metodo para cuando tecleo teniendo una tropa sobre el tablero
         private void ItemKeyDown(object sender, KeyRoutedEventArgs e)
         {
-
+            int i = 0;
         }
 
         // Funcion q abre el menu de mejoras

@@ -216,11 +216,11 @@ namespace TheLastOfThem_LosBichines
             return Bichines[id];
         }
 
-        public static Bichin GetBichinByName(string name)
+        public static Bichin GetBichinByPath(string path)
         {
             for (int i = 0; i < Bichines.Count; i++)
             {
-                if (Bichines[i].Name == name) return Bichines[i];
+                if (Bichines[i].Imagen == path) return Bichines[i];
             }
             return Bichines[0];
         }
