@@ -52,7 +52,7 @@
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="40">
                 <StackPanel Orientation="Horizontal" Spacing="20">
                     <Image Source="Assets/Images/fotoPerfil.png" Width="60"/>
-                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="40" Text="-Nombre Usuario-" HorizontalAlignment="Center"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="40" Text="{x:Bind UserName}" HorizontalAlignment="Center"/>
                 </StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>

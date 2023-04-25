@@ -23,6 +23,8 @@ namespace TheLastOfThem_LosBichines
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public string UserName = "";
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -56,12 +58,13 @@ namespace TheLastOfThem_LosBichines
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e?.Parameter is bool loggedIn)
+            if (e?.Parameter is string userName)
             {
-                if (loggedIn)
+                if (userName != "")
                 {
                     IniciarSesion.Visibility = Visibility.Collapsed;
                     SesionIniciada.Visibility = Visibility.Visible;
+                    UserName = userName;
                 }
                 else
                 {
@@ -76,7 +79,7 @@ namespace TheLastOfThem_LosBichines
 
         private void UserInfoButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(UserInfo));
+            Frame.Navigate(typeof(UserInfo), UserName);
         }
     }
 }

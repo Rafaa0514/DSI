@@ -29,7 +29,7 @@ namespace TheLastOfThem_LosBichines
         private string _userName;
         private string _password;
 
-        public Visibility IsLogInAllowed => (UserName?.Trim().Length > 2 && Password?.Trim().Length > 2) ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IsLogInAllowed => (UserName?.Trim().Length > 2 && UserName?.Trim().Length < 15 && Password?.Trim().Length > 2) ? Visibility.Visible : Visibility.Collapsed;
         public Visibility IsLogInNotAllowed => ((IsLogInAllowed == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed);
 
         public string UserName
@@ -62,7 +62,7 @@ namespace TheLastOfThem_LosBichines
 
         private void AcceptButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage), true);
+            Frame.Navigate(typeof(MainPage), _userName);
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)

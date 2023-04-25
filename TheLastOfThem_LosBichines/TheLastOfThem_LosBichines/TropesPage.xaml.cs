@@ -100,6 +100,8 @@ namespace TheLastOfThem_LosBichines
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeType)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeDescription)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeImage)));
+
+            BackToTropesButton.Focus(FocusState.Programmatic);
         }
 
         private void BackToTropesButton_OnClick(object sender, RoutedEventArgs e)

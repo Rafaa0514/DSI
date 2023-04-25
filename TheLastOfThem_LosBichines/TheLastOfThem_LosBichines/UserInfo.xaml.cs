@@ -22,6 +22,9 @@ namespace TheLastOfThem_LosBichines
     /// </summary>
     public sealed partial class UserInfo : Page
     {
+
+        public string UserName = "";
+
         public UserInfo()
         {
             this.InitializeComponent();
@@ -29,7 +32,7 @@ namespace TheLastOfThem_LosBichines
 
         private void LogOutButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage), false);
+            Frame.Navigate(typeof(MainPage), "");
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
@@ -38,6 +41,19 @@ namespace TheLastOfThem_LosBichines
             {
                 Frame.GoBack();
             }
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e?.Parameter is string userName)
+            {
+                if (userName != "")
+                {
+                    UserName = "-" + userName + "-";
+                }
+            }
+
+
+            base.OnNavigatedTo(e);
         }
     }
 }
