@@ -21,6 +21,8 @@ namespace TheLastOfThem_LosBichines
 
             Id = b.Id;
             Name = b.Name;
+            Type = b.Type;
+            Description = b.Description;
             Imagen = b.Imagen;
             Desbloqueado = b.Desbloqueado;
             Seleccionable = b.Seleccionable;

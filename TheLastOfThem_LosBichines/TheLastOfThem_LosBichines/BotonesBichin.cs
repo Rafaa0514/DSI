@@ -72,7 +72,7 @@ namespace TheLastOfThem_LosBichines
             new BotonBichin()
             {
                 Id = 3,
-                Name = "ConstructorBallesta",
+                Name = "Ballestero",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorBallesta.png",
                 BotonBloqueado = "Assets\\Images\\blockedSymbol.png",
                 BotonMejorar = "Assets\\Images\\upgradeSymbol.png",
@@ -85,7 +85,7 @@ namespace TheLastOfThem_LosBichines
             new BotonBichin()
             {
                 Id = 4,
-                Name = "ConstructorPared",
+                Name = "MrMuro",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorPared.png",
                 BotonBloqueado = "Assets\\Images\\blockedSymbol.png",
                 BotonMejorar = "Assets\\Images\\upgradeSymbol.png",
@@ -98,7 +98,7 @@ namespace TheLastOfThem_LosBichines
             new BotonBichin()
             {
                 Id = 5,
-                Name = "Trampero",
+                Name = "Tramposo",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Trampero.png",
                 BotonBloqueado = "Assets\\Images\\blockedSymbol.png",
                 BotonMejorar = "Assets\\Images\\upgradeSymbol.png",
@@ -176,7 +176,7 @@ namespace TheLastOfThem_LosBichines
             new BotonBichin()
             {
                 Id = 11,
-                Name = "Gymbro",
+                Name = "GymBro",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Gymbro.png",
                 BotonBloqueado = "Assets\\Images\\blockedSymbol.png",
                 BotonMejorar = "Assets\\Images\\upgradeSymbol.png",

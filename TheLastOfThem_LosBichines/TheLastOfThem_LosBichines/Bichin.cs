@@ -13,6 +13,8 @@ namespace TheLastOfThem_LosBichines
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
+        public string Description { get; set; }
         public string Group { get; set; }
         public string Imagen { get; set; }
         public Visibility Desbloqueado { get; set; }
@@ -30,6 +32,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 0,
                 Name = "PateaPiedras",
+                Type = "Defensa / Luchador",
+                Description = "Lanza pedradas a los enemigos utilizando sus fornidas piernas.",
                 Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-PateaPiedras.png",
                 Desbloqueado = Visibility.Visible,
@@ -40,6 +44,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 1,
                 Name = "Escudero",
+                Type = "Defensa / Luchador",
+                Description = "Mantiene los enemigos a raya y les devuelve sus ataques.",
                 Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Escudero.png",
                 Desbloqueado = Visibility.Collapsed,
@@ -50,6 +56,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 2,
                 Name = "Loco",
+                Type = "Defensa / Luchador",
+                Description = "Gira con su espada sin control para evitar que los enemigos penetren en las defensas.",
                 Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Loco.png",
                 Desbloqueado = Visibility.Visible,
@@ -59,7 +67,9 @@ namespace TheLastOfThem_LosBichines
             new Bichin()
             {
                 Id = 3,
-                Name = "ConstructorBallesta",
+                Name = "Ballestero",
+                Type = "Defensa / Constructor",
+                Description = "Construye una ballesta que disparará a los enemigos desde una larga distancia.",
                 Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorBallesta.png",
                 Desbloqueado = Visibility.Visible,
@@ -69,7 +79,9 @@ namespace TheLastOfThem_LosBichines
             new Bichin()
             {
                 Id = 4,
-                Name = "ConstructorPared",
+                Name = "MrMuro",
+                Type = "Defensa / Constructor",
+                Description = "Alza un muro delante de él que evitará que los enemigos pasen por ahí.",
                 Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-ConstructorPared.png",
                 Desbloqueado = Visibility.Visible,
@@ -79,7 +91,9 @@ namespace TheLastOfThem_LosBichines
             new Bichin()
             {
                 Id = 5,
-                Name = "Trampero",
+                Name = "Tramposo",
+                Type = "Defensa / Constructor",
+                Description = "Coloca una trampa en una casilla. Los enemigos no sobrevivirán al caer en ella.",
                 Group = "Defensas",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Trampero.png",
                 Desbloqueado = Visibility.Visible,
@@ -90,6 +104,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 0,
                 Name = "MineroPequeño",
+                Type = "Minero",
+                Description = "Mina a gran velocidad aumentando considerablemente la producción de oro pero es muy frágil ante ataques enemigos.",
                 Group = "Mineros",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-MineroPequeño.png",
                 Desbloqueado = Visibility.Visible,
@@ -100,6 +116,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 1,
                 Name = "Minero",
+                Type = "Minero",
+                Description = "Es capaz de extraer oro de la mina aumentando su producción.",
                 Group = "Mineros",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Minero.png",
                 Desbloqueado = Visibility.Collapsed,
@@ -110,6 +128,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 2,
                 Name = "MineroGrande",
+                Type = "Minero",
+                Description = "Excava en la mina de forma lenta pero segura, no es el más rápido pero es muy confiable y resistente.",
                 Group = "Mineros",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-MineroGrande.png",
                 Desbloqueado = Visibility.Visible,
@@ -120,6 +140,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 0,
                 Name = "Arquero",
+                Type = "Ataque / Luchador",
+                Description = "Lanza flechas a los enemigos desde la distancia para avanzar con el ataque.",
                 Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Arquero.png",
                 Desbloqueado = Visibility.Visible,
@@ -130,6 +152,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 1,
                 Name = "Espadachin",
+                Type = "Ataque / Luchador",
+                Description = "Combate cuerpo a cuerpo en el campo enemigo en favor del avance.",
                 Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Espadachin.png",
                 Desbloqueado = Visibility.Collapsed,
@@ -140,6 +164,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 2,
                 Name = "GymBro",
+                Type = "Ataque / Luchador",
+                Description = "Gran combatiente que se deja la piel en contra el rival en su propio terreno de juego.",
                 Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-GymBro.png",
                 Desbloqueado = Visibility.Visible,
@@ -150,6 +176,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 3,
                 Name = "Bombardero",
+                Type = "Ataque / Asedio",
+                Description = "Pirómano que lanzará bombas para derrumbar las construcciones enemigas.",
                 Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Bombardero.png",
                 Desbloqueado = Visibility.Visible,
@@ -160,6 +188,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 4,
                 Name = "Ariete",
+                Type = "Ataque / Asedio",
+                Description = "Con gran fortaleza carga con un tronco afilado que usará para atacar a las edificaciones rivales.",
                 Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin-Ariete.png",
                 Desbloqueado = Visibility.Visible,
@@ -170,6 +200,8 @@ namespace TheLastOfThem_LosBichines
             {
                 Id = 5,
                 Name = "Gorila",
+                Type = "Ataque / Asedio",
+                Description = "Gigante capaz de resistir los mayores golpes y derribar las mayores construcciones.",
                 Group = "Atacantes",
                 Imagen = "Assets\\Images\\Bichines\\Bichin Gorila.png",
                 Desbloqueado = Visibility.Visible,

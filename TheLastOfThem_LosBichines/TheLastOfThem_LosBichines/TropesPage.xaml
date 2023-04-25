@@ -17,6 +17,16 @@
                 </Grid>
             </StackPanel>
         </DataTemplate>
+        <Style TargetType="GridView" x:Key="BichinGridView">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="IsTabStop" Value="{x:Bind BichinNotSelected, Mode=OneWay}"/>
+            <Setter Property="IsFocusEngagementEnabled" Value="{x:Bind BichinNotSelected, Mode=OneWay}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="IsItemClickEnabled" Value="True"/>
+            <Setter Property="ItemTemplate" Value="{StaticResource BichinVM}"/>
+        </Style>
     </Page.Resources>
     
     <Grid>
@@ -42,23 +52,23 @@
                 VerticalAlignment="Top"/>
 
             <!--ATRAS-->
-            <Button Name="Back" Click="BackButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Button Click="BackButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                 <Image Source="Assets/Images/Atras.png"/>
             </Button>
 
             <!--Panel de Tropas-->
-            <Grid x:Name="PanelTropas" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Grid x:Name="PanelTropas" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="45*"/>
-                    <RowDefinition Height="18*"/>
+                    <RowDefinition Height="180*"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250*"/>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="250*"/>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="250*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="25*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock 
@@ -67,7 +77,7 @@
                 FontSize="50" 
                 Foreground="#d1ee91"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Top"/>
+                VerticalAlignment="Center"/>
 
 
                 <TextBlock  Grid.Column="2"
@@ -76,10 +86,10 @@
                 FontSize="50" 
                 Foreground="#d1ee91"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Top"/>
+                VerticalAlignment="Center"/>
 
 
-                <TextBlock VerticalAlignment="Top" Grid.Column="4"
+                <TextBlock VerticalAlignment="Center" Grid.Column="4"
                 Text="Ataque"
                 FontFamily="{StaticResource Fuente}" 
                 FontSize="50" 
@@ -88,26 +98,68 @@
                 />
 
                 <!--GridViews con las tropas-->
-                <GridView x:Name="Defensas" Margin="20" Grid.Row="1" ItemsSource="{x:Bind BichinesDefensa}" ItemTemplate="{StaticResource BichinVM }" 
-                            VerticalAlignment="Center" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                            IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True"/>
+                <GridView x:Name="Defensas" Margin="20" Grid.Row="1" ItemsSource="{x:Bind BichinesDefensa}" 
+                          Style="{StaticResource BichinGridView}" ItemClick="Bichin_OnClick" CharacterSpacing="50"/>
 
                 <Line Grid.Row="1" Grid.Column="1" Stroke="#d1ee91" Y1="400" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
 
                 <GridView x:Name="Mineros" Margin="20" Grid.Row="2" Grid.Column="2" ItemsSource="{x:Bind BichinesMineros}"
-                            ItemTemplate="{StaticResource BichinVM }"
-                            VerticalAlignment="Center" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                            IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True" IsItemClickEnabled="True">
+                          Style="{StaticResource BichinGridView}" ItemClick="Bichin_OnClick">
                 </GridView>
 
                 <Line Grid.Row="1" Grid.Column="3" Stroke="#d1ee91" Y1="400" StrokeThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
 
                 <GridView x:Name="Atacantes" Margin="20" Grid.Row="1" Grid.Column="4" ItemsSource="{x:Bind BichinesAtaque}"
-                            ItemTemplate="{StaticResource BichinVM }" HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                            IsTabStop="True" IsFocusEngagementEnabled="True" UseSystemFocusVisuals="True" />
+                          Style="{StaticResource BichinGridView}" ItemClick="Bichin_OnClick"/>
             </Grid>
 
+        </Grid>
+
+        <Grid Visibility="{x:Bind ShowingInfoWindow, Mode=OneWay}">
+            <Rectangle Fill="Black" Stretch="Fill" Opacity="0.3"/>
+            <!--POST IT-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="/Assets/Images/post-it rosa.png" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+                    <!--ATRAS-->
+                    <Button Click="BackToTropesButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1">
+                        <Image Source="Assets/Images/Atras.png"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            <!--INFO TROPA-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image Source="{x:Bind SelectedTropeImage, Mode=OneWay}" Width="250"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="50" Foreground="#e93578" Text="{x:Bind SelectedTropeName, Mode=OneWay}" HorizontalAlignment="Center"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="25" Foreground="#d1ee91" Text="-Tipo-"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="25" Foreground="Black" Text="{x:Bind SelectedTropeType, Mode=OneWay}" Margin="10, 0"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="25" Foreground="#d1ee91" Margin="0, 10" Text="-Descripción-"/>
+                    <TextBlock FontFamily="{StaticResource Fuente}" FontSize="25" Foreground="Black" Text="{x:Bind SelectedTropeDescription, Mode=OneWay}" Margin="10, 0"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

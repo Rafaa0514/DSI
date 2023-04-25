@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,23 +22,36 @@ namespace TheLastOfThem_LosBichines
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class TropesPage : Page
+    public sealed partial class TropesPage : Page, INotifyPropertyChanged
     {
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         // Referencia a la tropa que seleccionamos en el Menu de tropas
-        VMBButton BichinClickao;
+        VMBichin BichinClickao = null;
 
         // Listas de Bichines (Panel de tropas)
         public ObservableCollection<VMBichin> ListaBichines { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesDefensa { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesMineros { get; } = new ObservableCollection<VMBichin>();
         public ObservableCollection<VMBichin> BichinesAtaque { get; } = new ObservableCollection<VMBichin>();
-        public ObservableCollection<VMBButton> BotonesBichines { get; } = new ObservableCollection<VMBButton>();
+
+        private bool _bichinSelected = false;
+        public bool BichinNotSelected => !_bichinSelected;
+        public Visibility ShowingInfoWindow => (!_bichinSelected) ? Visibility.Visible : Visibility.Collapsed;
+        public string SelectedTropeName => (BichinClickao != null)?BichinClickao.Name:"";
+        public string SelectedTropeType => (BichinClickao != null) ? BichinClickao.Type : "";
+        public string SelectedTropeDescription => (BichinClickao != null) ? BichinClickao.Description : "";
+        public string SelectedTropeImage => (BichinClickao != null) ? BichinClickao.Imagen : "Assets\\Images\\Bichines\\Bichin-PateaPiedras.png";
 
 
         public TropesPage()
         {
             this.InitializeComponent();
+            _bichinSelected = true;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BichinNotSelected)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
+
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -65,14 +79,6 @@ namespace TheLastOfThem_LosBichines
                     ListaBichines.Add(VMitem);
                 }
 
-            if (BotonesBichines != null)
-            {
-                foreach (BotonBichin bb in ButtonModel.GetAllButtons())
-                {
-                    VMBButton VMitem = new VMBButton(bb);
-                    BotonesBichines.Add(VMitem);
-                }
-            }
             base.OnNavigatedTo(e);
         }
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
@@ -81,6 +87,26 @@ namespace TheLastOfThem_LosBichines
             {
                 Frame.GoBack();
             }
+        }
+
+        private void Bichin_OnClick(object sender, ItemClickEventArgs e)
+        {
+            BichinClickao = e.ClickedItem as VMBichin;
+
+            _bichinSelected = false;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BichinNotSelected)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeName)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeType)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeDescription)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeImage)));
+        }
+
+        private void BackToTropesButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _bichinSelected = true;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BichinNotSelected)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
         }
     }
 }
