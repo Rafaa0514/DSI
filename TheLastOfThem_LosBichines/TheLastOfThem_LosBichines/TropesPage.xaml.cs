@@ -105,17 +105,6 @@ namespace TheLastOfThem_LosBichines
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
         }
 
-        private void OnKeyDown_BackButton(object sender, KeyRoutedEventArgs e)
-        {
-            switch(e.Key)
-            {
-                case Windows.System.VirtualKey.GoBack:
-                    if (_bichinSelected) UnselectBichin();
-                    else if (Frame.CanGoBack) Frame.GoBack();
-                    break;
-            }
-        }
-
         private void UnselectBichin()
         {
             _bichinSelected = false;
