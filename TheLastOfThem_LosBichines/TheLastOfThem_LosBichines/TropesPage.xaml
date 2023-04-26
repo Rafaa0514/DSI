@@ -50,7 +50,7 @@
                 VerticalAlignment="Top"/>
 
             <!--ATRAS-->
-            <Button Click="BackButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Button Click="BackButton_OnClick" Grid.Row="1" Width="100" HorizontalAlignment="Left" VerticalAlignment="Stretch" KeyDown="OnKeyDown_BackButton">
                 <Image Source="Assets/Images/Atras.png"/>
             </Button>
 
@@ -156,7 +156,8 @@
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <!--ATRAS-->
-                    <Button x:Name="BackToTropesButton" Click="BackToTropesButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1">
+                    <Button x:Name="BackToTropesButton" Click="BackToTropesButton_OnClick" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1"
+                            KeyDown="OnKeyDown_BackButton">
                         <Image Source="Assets/Images/Atras.png"/>
                     </Button>
                 </Grid>

@@ -93,13 +93,7 @@ namespace TheLastOfThem_LosBichines
         {
             BichinClickao = e.ClickedItem as VMBichin;
 
-            _bichinSelected = false;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BichinNotSelected)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeName)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeType)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeDescription)));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeImage)));
+            UnselectBichin();
 
             BackToTropesButton.Focus(FocusState.Programmatic);
         }
@@ -109,6 +103,28 @@ namespace TheLastOfThem_LosBichines
             _bichinSelected = true;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BichinNotSelected)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
+        }
+
+        private void OnKeyDown_BackButton(object sender, KeyRoutedEventArgs e)
+        {
+            switch(e.Key)
+            {
+                case Windows.System.VirtualKey.GoBack:
+                    if (_bichinSelected) UnselectBichin();
+                    else if (Frame.CanGoBack) Frame.GoBack();
+                    break;
+            }
+        }
+
+        private void UnselectBichin()
+        {
+            _bichinSelected = false;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BichinNotSelected)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowingInfoWindow)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeName)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeType)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeDescription)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedTropeImage)));
         }
     }
 }

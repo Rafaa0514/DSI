@@ -6,6 +6,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Core;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -73,6 +75,7 @@ namespace TheLastOfThem_LosBichines
                 }
             }
 
+            LoadAndPlaySound();
 
             base.OnNavigatedTo(e);
         }
@@ -80,6 +83,19 @@ namespace TheLastOfThem_LosBichines
         private void UserInfoButton_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(UserInfo), UserName);
+        }
+
+        private async void LoadAndPlaySound()
+        {
+            if (App.FirstLog) 
+            {
+                App.GlobalMediaPlayer.Source = MediaSource.CreateFromStorageFile(await StorageFile.GetFileFromApplicationUriAsync(new Uri("Assets/Sounds/Background.mp3")));
+                App.GlobalMediaPlayer.Volume = 1;
+                App.GlobalMediaPlayer.IsLoopingEnabled = true;
+                App.GlobalMediaPlayer.Play();
+                
+                App.FirstLog = false;
+            }
         }
     }
 }

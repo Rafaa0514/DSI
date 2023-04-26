@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,8 +21,17 @@ namespace TheLastOfThem_LosBichines
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class OptionsPage : Page
+    public sealed partial class OptionsPage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public double MusicVolume { 
+            get { return App.GlobalMediaPlayer.Volume * 100; } 
+            set 
+            {
+                App.GlobalMediaPlayer.Volume = value / 100.0;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MusicVolume)));
+            }
+        }
         public OptionsPage()
         {
             this.InitializeComponent();

@@ -56,7 +56,8 @@
                         <Slider
                             Width="300"
                             HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center">
+                            VerticalAlignment="Center"
+                            Value="{x:Bind MusicVolume, Mode=TwoWay}">
                         </Slider>
                         <CheckBox HorizontalContentAlignment="Left" 
                             HorizontalAlignment="Center">
