@@ -60,6 +60,8 @@ namespace TheLastOfThem_LosBichines
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             if (e?.Parameter is string userName)
             {
                 if (userName != "")
@@ -76,8 +78,6 @@ namespace TheLastOfThem_LosBichines
             }
 
             LoadAndPlaySound();
-
-            base.OnNavigatedTo(e);
         }
 
         private void UserInfoButton_OnClick(object sender, RoutedEventArgs e)
@@ -89,7 +89,7 @@ namespace TheLastOfThem_LosBichines
         {
             if (App.FirstLog) 
             {
-                App.GlobalMediaPlayer.Source = MediaSource.CreateFromStorageFile(await StorageFile.GetFileFromApplicationUriAsync(new Uri("Assets/Sounds/Background.mp3")));
+                App.GlobalMediaPlayer.Source = MediaSource.CreateFromStorageFile(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Background.mp3")));
                 App.GlobalMediaPlayer.Volume = 1;
                 App.GlobalMediaPlayer.IsLoopingEnabled = true;
                 App.GlobalMediaPlayer.Play();
